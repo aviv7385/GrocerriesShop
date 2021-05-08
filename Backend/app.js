@@ -4,6 +4,8 @@ const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const productsController = require("./controllers/products-controller");
 const adminController = require("./controllers/admin-controller");
+const authController = require("./controllers/auth-controller");
+const usersController = require("./controllers/users-controller");
 
 const server = express(); // Create the entire server.
 
@@ -16,6 +18,8 @@ server.use(cors());
 
 server.use("/api/admin/products", adminController);
 server.use("/api/products", productsController);
+server.use("/api/auth", authController);
+server.use("/api/users", usersController);
 
 
 server.use("*", (request, response) => {
