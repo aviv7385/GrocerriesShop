@@ -3,6 +3,7 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const productsController = require("./controllers/products-controller");
+const adminController = require("./controllers/admin-controller");
 
 const server = express(); // Create the entire server.
 
@@ -13,6 +14,7 @@ server.use(fileUpload());
 // enable CORS to all clients
 server.use(cors());
 
+server.use("/api/admin/products", adminController);
 server.use("/api/products", productsController);
 
 
