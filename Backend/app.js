@@ -6,6 +6,7 @@ const productsController = require("./controllers/products-controller");
 const adminController = require("./controllers/admin-controller");
 const authController = require("./controllers/auth-controller");
 const usersController = require("./controllers/users-controller");
+const cartsController = require("./controllers/carts-controller");
 
 const server = express(); // Create the entire server.
 
@@ -20,6 +21,7 @@ server.use("/api/admin/products", adminController);
 server.use("/api/products", productsController);
 server.use("/api/auth", authController);
 server.use("/api/users", usersController);
+server.use("/api/carts", cartsController);
 
 
 server.use("*", (request, response) => {
