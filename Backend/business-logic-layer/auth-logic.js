@@ -14,7 +14,7 @@ async function registerAsync(user) {
 
     const sql = `INSERT INTO users  
                 VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT)`;
-    const values = [user.idNumber, user.uuid, user.firstName, user.lastName, user.username, user.password, user.city, user.street];
+    const values = [user.idNumber, user.uuid, user.firstName, user.lastName, user.email, user.password, user.cityId, user.street];
     const info = await dal.executeAsync(sql, values);
     user.userId = info.insertId;
 
@@ -33,9 +33,9 @@ async function loginAsync(credentials) {
     // Hash user password: 
     credentials.password = cryptoHelper.hash(credentials.password);
 
-    const sql = `SELECT userId, uuid, idNumber, firstName, lastName, username, city, street, isAdmin FROM users 
-                WHERE username = ? AND password = ?`;
-    const values = [credentials.username, credentials.password];
+    const sql = `SELECT userId, uuid, idNumber, firstName, lastName, email, cityId, street, isAdmin FROM users 
+                WHERE email = ? AND password = ?`;
+    const values = [credentials.email, credentials.password];
     const users = await dal.executeAsync(sql, values);
     if (users.length === 0) {
         return null;
@@ -47,7 +47,15 @@ async function loginAsync(credentials) {
     return user;
 }
 
+// get all cities 
+async function getAllCitiesAsync() {
+    const sql = `SELECT cityId, city FROM cities`;
+    const cities = await dal.executeAsync(sql);
+    return cities;
+}
+
 module.exports = {
     registerAsync,
-    loginAsync
+    loginAsync,
+    getAllCitiesAsync
 };

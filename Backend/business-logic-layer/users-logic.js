@@ -2,29 +2,34 @@ const dal = require("../data-access-layer/dal");
 
 // get all users
 async function getAllUsersAsync() {
-    const sql = `SELECT userId, uuid, idNumber, username, firstName, lastName, city, street, isAdmin FROM users`;
-    console.log(sql);
+    const sql = `SELECT userId, uuid, idNumber, email, firstName, lastName, C.city, street, isAdmin 
+                FROM users AS U JOIN cities AS C
+                ON C.cityId = U.cityId`;
     const users = await dal.executeAsync(sql);
     return users;
 }
 
 // get one user
 async function getOneUserAsync(uuid) {
-    const sql = `SELECT userId, uuid, idNumber, username, firstName, lastName, city, street, isAdmin FROM users
+    const sql = `SELECT userId, uuid, idNumber, email, firstName, lastName, C.city, street, isAdmin 
+                FROM users AS U JOIN cities AS C
+                ON C.cityId = U.cityId
                 WHERE uuid = '${uuid}'`;
     const users = await dal.executeAsync(sql);
     return users[0];
 }
 
-// check if username exists
-async function checkUsernameAsync(username) {
-    const sql = `SELECT username FROM users WHERE username = '${username}'`;
-    const isUsername = await dal.executeAsync(sql);
-    return isUsername;
+// check if idNumber exists
+async function checkIdNumberAsync(idNumber) {
+    const sql = `SELECT idNumber FROM users WHERE idNumber = '${idNumber}'`;
+    const isIdNumber = await dal.executeAsync(sql);
+    return isIdNumber;
 }
+
+
 
 module.exports = {
     getAllUsersAsync,
     getOneUserAsync,
-    checkUsernameAsync
+    checkIdNumberAsync
 }

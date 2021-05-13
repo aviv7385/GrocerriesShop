@@ -14,7 +14,7 @@ router.get("/", async (request, response) => {
     }
 });
 
-// GET one users - /api/users/uuid
+// GET one user - /api/users/:uuid
 router.get("/:uuid", async (request, response) => {
     try {
         const uuid = request.params.uuid;
@@ -28,5 +28,7 @@ router.get("/:uuid", async (request, response) => {
         response.status(500).send(err.message);
     }
 });
+
+
 
 module.exports = router;
