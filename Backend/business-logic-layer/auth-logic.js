@@ -27,13 +27,16 @@ async function registerAsync(user) {
     return user;
 }
 
+
 // login - get one user (access allowed to any user)
 async function loginAsync(credentials) {
 
     // Hash user password: 
     credentials.password = cryptoHelper.hash(credentials.password);
 
-    const sql = `SELECT userId, uuid, idNumber, firstName, lastName, email, cityId, street, isAdmin FROM users 
+    const sql = `SELECT userId, uuid, idNumber, firstName, lastName, email, C.city, street, isAdmin 
+                FROM users AS U JOIN cities as C
+                ON U.cityId=C.cityId
                 WHERE email = ? AND password = ?`;
     const values = [credentials.email, credentials.password];
     const users = await dal.executeAsync(sql, values);
@@ -57,5 +60,5 @@ async function getAllCitiesAsync() {
 module.exports = {
     registerAsync,
     loginAsync,
-    getAllCitiesAsync
+    getAllCitiesAsync,
 };

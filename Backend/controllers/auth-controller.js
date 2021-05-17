@@ -23,6 +23,7 @@ router.post("/register", async (request, response) => {
     }
 });
 
+
 // POST - login existing user - "api/auth/login" (access allowed to any user)
 router.post("/login", async (request, response) => {
     try {
