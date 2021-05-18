@@ -11,8 +11,8 @@ async function addNewCartAsync(cart) {
 
 // add new item to the cart
 async function addNewItemAsync(item) {
-    const sql = `INSERT INTO cartitems VALUES(DEFAULT, ?, ?, ?, ?)`;
-    const values = [item.productId, item.cartId, item.quantity, item.totalPrice];
+    const sql = `INSERT INTO cartitems VALUES(DEFAULT, ?, ?, ?)`;
+    const values = [item.productId, item.cartId, item.quantity];
     const info = await dal.executeAsync(sql, values);
     item.itemId = info.insertId;
     return item;
@@ -45,7 +45,7 @@ async function getTotalPriceAsync(cartId) {
                 ON C.productId=P.productId
                 WHERE cartId=${cartId}`;
     const totalCartPrice = await dal.executeAsync(sql);
-    return totalCartPrice;
+    return totalCartPrice[0];
 }
 
 // delete an item from a cart
