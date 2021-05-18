@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const cartsLogic = require("../business-logic-layer/carts-logic");
 const CartItem = require("../models/cart-item");
 

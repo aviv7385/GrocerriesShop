@@ -1,6 +1,8 @@
 const dal = require("../data-access-layer/dal");
 const cartsLogic = require("./carts-logic");
 
+
+
 // add new order
 async function addNewOrderAsync(order) {
     const sql = `INSERT INTO orders(orderId, userId, cartId, shippingCity, shippingStreet, shippingDate, orderDate, cc4Digits) 
@@ -18,6 +20,27 @@ async function addNewOrderAsync(order) {
     return order;
 }
 
+// get order details (to create a receipt)
+async function getOrderDetailsAsync(orderId) {
+    const sql = `SELECT products.productName, cartitems.quantity, 
+                        (cartitems.quantity*products.price) AS totalPrice
+                        FROM ((cartitems
+                        JOIN products ON products.productId=cartitems.productId)
+                        JOIN orders ON orders.cartId=cartitems.cartId)
+                        WHERE orders.orderId=${orderId}`;
+    const details = await dal.executeAsync(sql);
+    return details;
+}
+
+// get final order price (for the receipt)
+async function getOrderFinalPriceAsync(orderId) {
+    const sql = `SELECT finalPrice FROM orders WHERE orderId=${orderId}`;
+    const finalPrice = await dal.executeAsync(sql);
+    return finalPrice;
+}
+
 module.exports = {
-    addNewOrderAsync
+    addNewOrderAsync,
+    getOrderDetailsAsync,
+    getOrderFinalPriceAsync
 }
