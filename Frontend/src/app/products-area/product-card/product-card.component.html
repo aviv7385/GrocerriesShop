@@ -1,0 +1,15 @@
+<div class="box">
+
+    <a routerLink="/products/{{product.productId}}">
+        <!-- <img src="http://localhost:3030/api/products/images/{{product.imageName}}" alt={{product.imageName}}> -->
+        <img [src]="imageUrl">
+    </a>
+    <div class="text">
+        {{product.productName}}
+        <br>
+        Price: {{product.price | currency}}
+        <button matTooltip="add to shopping cart">
+            <mat-icon>add_shopping_cart</mat-icon>
+        </button>
+    </div>
+</div>

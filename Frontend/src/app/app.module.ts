@@ -8,6 +8,11 @@ import { HomeComponent } from './layout-area/home/home.component';
 import { HeaderComponent } from './layout-area/header/header.component';
 import { MenuComponent } from './layout-area/menu/menu.component';
 import { FooterComponent } from './layout-area/footer/footer.component';
+import { ProductsListComponent } from './products-area/products-list/products-list.component';
+import { ProductCardComponent } from './products-area/product-card/product-card.component';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
     declarations: [
@@ -16,12 +21,17 @@ import { FooterComponent } from './layout-area/footer/footer.component';
         HeaderComponent,
         MenuComponent,
         FooterComponent,
+        ProductsListComponent,
+        ProductCardComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        MatIconModule,
+        BrowserAnimationsModule,
+        MatTooltipModule
     ],
     providers: [],
     bootstrap: [LayoutComponent]
