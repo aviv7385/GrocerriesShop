@@ -13,6 +13,10 @@ import { ProductCardComponent } from './products-area/product-card/product-card.
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Page404Component } from './shared-area/page404/page404.component';
+import { LoginComponent } from './auth-area/login/login.component';
+import { LogoutComponent } from './auth-area/logout/logout.component';
+import { RegisterComponent } from './auth-area/register/register.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +27,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         FooterComponent,
         ProductsListComponent,
         ProductCardComponent,
+        Page404Component,
+        LoginComponent,
+        LogoutComponent,
+        RegisterComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,0 +1,16 @@
+label {
+    display: block;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+input {
+    width: 200px;
+}
+
+form {
+    width: 300px;
+    margin: auto;
+}

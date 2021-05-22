@@ -22,7 +22,7 @@ export enum ProductsActionType {
 // Products Action: 
 export interface ProductsAction {
     type: ProductsActionType; // the type of action we want to execute
-    payload?: any; // the data we ant to send to Redux
+    payload?: any; // the data we want to send to Redux
 }
 
 // Products Reducer: 

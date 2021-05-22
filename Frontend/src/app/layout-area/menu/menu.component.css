@@ -1,8 +1,9 @@
 div {
     height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    position: absolute;
+    left: 20px;
+    top: 30px;
     
 }
 

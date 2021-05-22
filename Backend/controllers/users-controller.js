@@ -14,11 +14,11 @@ router.get("/", async (request, response) => {
     }
 });
 
-// GET one user - /api/users/:uuid
-router.get("/:uuid", async (request, response) => {
+// GET one user - /api/users/3
+router.get("/:userId", async (request, response) => {
     try {
-        const uuid = request.params.uuid;
-        const user = await usersLogic.getOneUserAsync(uuid);
+        const userId = +request.params.userId;
+        const user = await usersLogic.getOneUserAsync(userId);
         if (!user) {
             response.status(404).send(`User not found.`);
         }

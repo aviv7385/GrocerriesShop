@@ -86,7 +86,6 @@ router.patch("/items-quantity/:itemId", async (request, response) => {
         const cartItem = request.body;
         cartItem.itemId = +request.params.itemId;
         const updatedCartItem = await cartsLogic.updateQuantityOfItem(cartItem);
-        console.log(updatedCartItem);
 
         if (!updatedCartItem) {
             response.status(404).send(`id ${updatedCartItem.itemId} not found.`);

@@ -2,7 +2,7 @@ const dal = require("../data-access-layer/dal");
 
 // get all users
 async function getAllUsersAsync() {
-    const sql = `SELECT userId, uuid, idNumber, email, firstName, lastName, C.city, street, isAdmin 
+    const sql = `SELECT userId, idNumber, email, firstName, lastName, C.city, street, isAdmin 
                 FROM users AS U JOIN cities AS C
                 ON C.cityId = U.cityId`;
     const users = await dal.executeAsync(sql);
@@ -10,11 +10,11 @@ async function getAllUsersAsync() {
 }
 
 // get one user
-async function getOneUserAsync(uuid) {
-    const sql = `SELECT userId, uuid, idNumber, email, firstName, lastName, C.city, street, isAdmin 
+async function getOneUserAsync(userId) {
+    const sql = `SELECT userId, idNumber, email, firstName, lastName, C.city, street, isAdmin 
                 FROM users AS U JOIN cities AS C
                 ON C.cityId = U.cityId
-                WHERE uuid = '${uuid}'`;
+                WHERE userId = '${userId}'`;
     const users = await dal.executeAsync(sql);
     return users[0];
 }
