@@ -17,6 +17,7 @@ import { Page404Component } from './shared-area/page404/page404.component';
 import { LoginComponent } from './auth-area/login/login.component';
 import { LogoutComponent } from './auth-area/logout/logout.component';
 import { RegisterComponent } from './auth-area/register/register.component';
+import { Register2Component } from './auth-area/register2/register2.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { RegisterComponent } from './auth-area/register/register.component';
         LoginComponent,
         LogoutComponent,
         RegisterComponent,
+        Register2Component,
     ],
     imports: [
         BrowserModule,

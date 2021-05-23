@@ -15,15 +15,13 @@ router.get("/categories", async (request, response) => {
     }
 });
 
-// GET one category by category id (http://localhost:3001/api/products/categories/2)
+// GET all products by Category id(http://localhost:3001/api/products/categories/2)
 router.get("/categories/:categoryId", async (request, response) => {
     try {
         const categoryId = +request.params.categoryId;
-        const category = await productsLogic.getOneCategoryAsync(categoryId);
-        if (!category) {
-            response.status(404).send(`id ${categoryId} not found`);
-        }
-        response.json(category);
+        const products = await productsLogic.getAllProductsByCategoryAsync(categoryId);
+        
+        response.json(products);
     }
     catch (err) {
         response.status(500).send(err.message);
@@ -40,6 +38,8 @@ router.get("/", async (request, response) => {
         response.status(500).send(err.message);
     }
 });
+
+
 
 // GET one product by product id (http://localhost:3001/api/products/3)
 router.get("/:productId", async (request, response) => {

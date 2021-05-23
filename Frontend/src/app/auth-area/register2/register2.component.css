@@ -8,7 +8,7 @@ form {
     padding: 10px;
 }
 
-input {
+input, select, textarea {
     display: block;
     border-radius: 5px;
     text-align: left;
@@ -24,6 +24,12 @@ label {
     padding: 10px;
     width: 300px;
 }
+
+select {
+    width: 325px;
+    margin-top: 10px;
+}
+
 
 button {
     padding: 10px;

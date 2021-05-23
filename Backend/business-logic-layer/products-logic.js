@@ -8,16 +8,26 @@ async function getAllCategoriesAsync() {
     return categories;
 }
 
-// get one category by category id
-async function getOneCategoryAsync(categoryId) {
-    const sql = `SELECT * FROM categories WHERE categoryId=${categoryId}`;
-    const category = await dal.executeAsync(sql);
-    return category[0];
-}
+// // get one category by category id
+// async function getOneCategoryAsync(categoryId) {
+//     const sql = `SELECT * FROM categories WHERE categoryId=${categoryId}`;
+//     const category = await dal.executeAsync(sql);
+//     return category[0];
+// }
 
 // get all products
 async function getAllProductsAsync() {
     const sql = `SELECT * FROM products`;
+    const products = await dal.executeAsync(sql);
+    return products;
+}
+
+// get all products by category id
+async function getAllProductsByCategoryAsync(categoryId) {
+    const sql = `SELECT productId, productName, P.categoryId, C.categoryName, price, imageFileName
+                FROM products AS P JOIN categories AS C 
+                ON P.categoryId=C.categoryId
+                WHERE P.categoryId=${categoryId}`;
     const products = await dal.executeAsync(sql);
     return products;
 }
@@ -95,8 +105,9 @@ async function editPartialProductAsync(product, image) {
 
 module.exports = {
     getAllProductsAsync,
+    getAllProductsByCategoryAsync,
     getAllCategoriesAsync,
-    getOneCategoryAsync,
+    //getOneCategoryAsync,
     getOneProductAsync,
     addOneProductAsync,
     editFullProductAsync,
