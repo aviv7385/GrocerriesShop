@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './layout-area/layout/layout.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './layout-area/home/home.component';
 import { HeaderComponent } from './layout-area/header/header.component';
@@ -18,6 +18,11 @@ import { LoginComponent } from './auth-area/login/login.component';
 import { LogoutComponent } from './auth-area/logout/logout.component';
 import { RegisterComponent } from './auth-area/register/register.component';
 import { Register2Component } from './auth-area/register2/register2.component';
+import { JwtInterceptor } from './services/jwt.interceptor';
+import { AdminProductCardComponent } from './admin-area/admin-product-card/admin-product-card.component';
+import { AdminProductsListComponent } from './admin-area/admin-products-list/admin-products-list.component';
+import { AdminAddProductComponent } from './admin-area/admin-add-product/admin-add-product.component';
+import { AdminEditProductComponent } from './admin-area/admin-edit-product/admin-edit-product.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +38,10 @@ import { Register2Component } from './auth-area/register2/register2.component';
         LogoutComponent,
         RegisterComponent,
         Register2Component,
+        AdminProductCardComponent,
+        AdminProductsListComponent,
+        AdminAddProductComponent,
+        AdminEditProductComponent,
     ],
     imports: [
         BrowserModule,
@@ -43,7 +52,11 @@ import { Register2Component } from './auth-area/register2/register2.component';
         BrowserAnimationsModule,
         MatTooltipModule
     ],
-    providers: [],
+    providers: [{
+        provide: HTTP_INTERCEPTORS,
+        useClass: JwtInterceptor,
+        multi: true
+    }],
     bootstrap: [LayoutComponent]
 })
 export class AppModule { }

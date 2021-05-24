@@ -13,6 +13,11 @@ html, body {
 a {
     color: darkslateblue;
     text-decoration: none;
+    font-weight: 400;
+}
+
+a:hover {
+    color: white;
 }
 
 mat-icon {

@@ -1,6 +1,6 @@
 const express = require("express");
 const ordersLogic = require("../business-logic-layer/orders-logic");
-const uuid = require("uuid");
+const verifyLoggedIn = require("../middleware/verify-logged-in");
 const fileHandler = require("../helpers/file-handler");
 const router = express.Router(); // Only the routing mechanism for our controller.
 

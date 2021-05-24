@@ -1,11 +1,12 @@
 const express = require("express");
 const path = require("path");
 const productsLogic = require("../business-logic-layer/products-logic");
+const verifyLoggedIn = require("../middleware/verify-logged-in");
 
 const router = express.Router(); // Only the routing mechanism for our controller.
 
 // GET all categories (http://localhost:3001/api/products/categories)
-router.get("/categories", async (request, response) => {
+router.get("/categories", verifyLoggedIn, async (request, response) => {
     try {
         const categories = await productsLogic.getAllCategoriesAsync();
         response.json(categories);
@@ -16,11 +17,11 @@ router.get("/categories", async (request, response) => {
 });
 
 // GET all products by Category id(http://localhost:3001/api/products/categories/2)
-router.get("/categories/:categoryId", async (request, response) => {
+router.get("/categories/:categoryId", verifyLoggedIn, async (request, response) => {
     try {
         const categoryId = +request.params.categoryId;
         const products = await productsLogic.getAllProductsByCategoryAsync(categoryId);
-        
+
         response.json(products);
     }
     catch (err) {
@@ -29,7 +30,7 @@ router.get("/categories/:categoryId", async (request, response) => {
 });
 
 // GET all products (http://localhost:3001/api/products)
-router.get("/", async (request, response) => {
+router.get("/", verifyLoggedIn, async (request, response) => {
     try {
         const products = await productsLogic.getAllProductsAsync();
         response.json(products);
@@ -42,7 +43,7 @@ router.get("/", async (request, response) => {
 
 
 // GET one product by product id (http://localhost:3001/api/products/3)
-router.get("/:productId", async (request, response) => {
+router.get("/:productId", verifyLoggedIn, async (request, response) => {
     try {
         const productId = +request.params.productId;
         const product = await productsLogic.getOneProductAsync(productId);

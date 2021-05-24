@@ -1,9 +1,23 @@
-<div>
+<div class="left-menu">
     <nav>
         <a routerLink="/home" routerLinkActive="active">Home</a>
-      &nbsp; &nbsp;
-        <a routerLink="/register" routerLinkActive="active">Register</a>
-       &nbsp; &nbsp;
-        <!-- <a routerLink="/" routerLinkActive="active">link</a> -->
+        &nbsp; &nbsp;
+        <a routerLink="/products" routerLinkActive="active">Products</a>
+        &nbsp; &nbsp;
+       
     </nav>
+</div>
+
+<div class="right-menu">
+    <ng-container *ngIf="!user || !user.firstName">
+        <span>HELLO GUEST!</span>
+        &nbsp; &nbsp;
+        <a routerLink="/login" routerLinkActive="active">LOGIN</a>
+    </ng-container>
+
+    <ng-container *ngIf="user && user.firstName">
+        <span>HELLO {{user.firstName.toUpperCase()}} {{user.lastName.toUpperCase()}}!</span>
+        &nbsp; &nbsp;
+        <a routerLink="/logout" routerLinkActive="active">LOGOUT</a>
+    </ng-container>
 </div>

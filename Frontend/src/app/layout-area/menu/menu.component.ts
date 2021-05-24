@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Unsubscribe } from 'redux';
+import { UserModel } from 'src/app/models/user.model';
+import store from 'src/app/redux/store';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+    public user: UserModel = store.getState().authState.user;
+    public unsubscribeStore: Unsubscribe;
 
-  ngOnInit(): void {
-  }
+    public ngOnInit(): void {
+
+        this.unsubscribeStore = store.subscribe(() => {
+            this.user = store.getState().authState.user;
+        });
+    }
+
+    public ngOnDestroy(): void {
+        this.unsubscribeStore();
+    }
 
 }

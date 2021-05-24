@@ -7,8 +7,10 @@
         {{product.productName}}
         <br>
         Price: {{product.price | currency}}
-        <button matTooltip="add to shopping cart">
-            <mat-icon>add_shopping_cart</mat-icon>
+        <button matTooltip="edit product">
+            <mat-icon>    
+                <a routerLink="/edit-product">edit</a>
+            </mat-icon>
         </button>
     </div>
 </div>

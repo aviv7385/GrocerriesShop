@@ -1,10 +1,17 @@
-div {
+.left-menu {
     height: 100%;
     display: flex;
     position: absolute;
     left: 20px;
+    top: 30px;    
+}
+
+.right-menu {
+    height: 100%;
+    display: flex;
+    position: absolute;
+    right: 20px;
     top: 30px;
-    
 }
 
 .active {
