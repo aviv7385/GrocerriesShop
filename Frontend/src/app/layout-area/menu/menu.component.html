@@ -2,19 +2,32 @@
     <nav>
         <a routerLink="/home" routerLinkActive="active">Home</a>
         &nbsp; &nbsp;
-        <a routerLink="/products" routerLinkActive="active">Products</a>
-        &nbsp; &nbsp;
-       
+
+        <!-- if user is not admin - show link to products for regular users (with no options to edit or add a product, and with option to add to cart) -->
+        <ng-container *ngIf="!user || !user.isAdmin">
+            <a routerLink="/products" routerLinkActive="active">Products</a>
+            &nbsp; &nbsp;
+        </ng-container>
+
+        <!-- if user is Admin - show link to products for Admin (with no option to add to cart and with options to edit/add a product) -->
+        <ng-container *ngIf="user && user.isAdmin">
+            <a routerLink="/admin" routerLinkActive="active">Products</a>
+            &nbsp; &nbsp;
+            <a routerLink="/add-product" routerLinkActive="active">Add Product</a>
+            &nbsp; &nbsp;
+        </ng-container>
     </nav>
 </div>
 
 <div class="right-menu">
+    <!-- if user is not logged-in - show a "login" link + a "Hello Guest" -->
     <ng-container *ngIf="!user || !user.firstName">
         <span>HELLO GUEST!</span>
         &nbsp; &nbsp;
         <a routerLink="/login" routerLinkActive="active">LOGIN</a>
     </ng-container>
 
+    <!-- if user is logged-in - show a "logout" link + a "Hello (user name)" -->
     <ng-container *ngIf="user && user.firstName">
         <span>HELLO {{user.firstName.toUpperCase()}} {{user.lastName.toUpperCase()}}!</span>
         &nbsp; &nbsp;

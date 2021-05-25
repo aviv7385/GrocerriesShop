@@ -1,37 +1,40 @@
 <h2>Register</h2>
 
 <div class="box">
-<form #formInfo="ngForm" (submit)="updateUser()">
+    <form #formInfo="ngForm" (submit)="updateUser()">
 
-    <label>First Name:</label>
-    <input type="text" name="firstName" [(ngModel)]="user.firstName" #firstNameInfo="ngModel" required minlength="2" pattern="^[A-Za-z]+$">
-    <span *ngIf="firstNameInfo.errors?.required && firstNameInfo.touched">Required Field</span>
-    <span *ngIf="firstNameInfo.errors?.minlength">Minimum 2 Letters<br></span>
-    <span *ngIf="firstNameInfo.errors?.pattern">Please type only English letters</span>
-    <br><br>
+        <label>First Name:</label>
+        <input type="text" name="firstName" [(ngModel)]="user.firstName" #firstNameInfo="ngModel" required minlength="2"
+            pattern="^[A-Za-z]+$">
+        <span *ngIf="firstNameInfo.errors?.required && firstNameInfo.touched">Required Field</span>
+        <span *ngIf="firstNameInfo.errors?.minlength">Minimum 2 Letters<br></span>
+        <span *ngIf="firstNameInfo.errors?.pattern">Please type only English letters</span>
+        <br><br>
 
-    <label>Last Name:</label>
-    <input type="text" name="lastName" [(ngModel)]="user.lastName" #lastNameInfo="ngModel" required minlength="2" pattern="^[A-Za-z]+$">
-    <span *ngIf="lastNameInfo.errors?.required && lastNameInfo.touched">Required Field</span>
-    <span *ngIf="lastNameInfo.errors?.minlength">Minimum 2 Letters<br></span>
-    <span *ngIf="lastNameInfo.errors?.pattern">Please type only English letters</span>
-    <br><br>
+        <label>Last Name:</label>
+        <input type="text" name="lastName" [(ngModel)]="user.lastName" #lastNameInfo="ngModel" required minlength="2"
+            pattern="^[A-Za-z]+$">
+        <span *ngIf="lastNameInfo.errors?.required && lastNameInfo.touched">Required Field</span>
+        <span *ngIf="lastNameInfo.errors?.minlength">Minimum 2 Letters<br></span>
+        <span *ngIf="lastNameInfo.errors?.pattern">Please type only English letters</span>
+        <br><br>
 
-    <label>City:</label>
-    <select name="city" id="user.cityId" [(ngModel)]="user.cityId" #cityInfo="ngModel" required>
-        <option selected disabled value="undefined">Select City</option>
-        <option *ngFor="let c of cities" [value]="c.cityId">{{c.city}}</option>
-    </select>
-    <span *ngIf="cityInfo.errors?.required && cityInfo.touched">Required Field</span>
-    <br><br>
+        <label>City:</label>
+        <select name="city" id="user.cityId" [(ngModel)]="user.cityId" #cityInfo="ngModel" required>
+            <option selected disabled value="undefined">Select City</option>
+            <option *ngFor="let c of cities" [value]="c.cityId">{{c.city}}</option>
+        </select>
+        <span *ngIf="cityInfo.errors?.required && cityInfo.touched">Required Field</span>
+        <br><br>
 
-    <label>Street:</label>
-    <input type="text" name="street" [(ngModel)]="user.street" #streetInfo="ngModel" required pattern="^\S[\w \b_./+-]*$" minlength="5">
-    <span *ngIf="streetInfo.errors?.required && streetInfo.touched">Required Field</span>
-    <span *ngIf="streetInfo.errors?.minlength">Minimum 5 Characters<br></span>
-    <span *ngIf="streetInfo.errors?.pattern">Please type digits and English letters</span>
-    <br><br>
+        <label>Street:</label>
+        <input type="text" name="street" [(ngModel)]="user.street" #streetInfo="ngModel" required
+            pattern="^\S[\w \b_./+-]*$" minlength="5">
+        <span *ngIf="streetInfo.errors?.required && streetInfo.touched">Required Field</span>
+        <span *ngIf="streetInfo.errors?.minlength">Minimum 5 Characters<br></span>
+        <span *ngIf="streetInfo.errors?.pattern">Please type digits and English letters</span>
+        <br><br>
 
-    <button [disabled]="formInfo.form.invalid">Finish Registration</button>
-</form>
+        <button [disabled]="formInfo.form.invalid">Finish Registration</button>
+    </form>
 </div>

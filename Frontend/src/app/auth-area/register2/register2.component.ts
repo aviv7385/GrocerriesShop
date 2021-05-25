@@ -22,8 +22,7 @@ export class Register2Component implements OnInit {
     public async ngOnInit() {
         try {
             // get all cities (to display in the "select" box)
-            this.cities = await this.authService.getCitiesList();
-            console.log(this.cities);
+            this.cities = await this.authService.getCitiesList();            
         }
         catch (err) {
             console.log(err);
@@ -34,7 +33,6 @@ export class Register2Component implements OnInit {
     public async updateUser() {
         try {
             const updatedUser = await this.authService.registerStep2(this.userId, this.user);
-            console.log(updatedUser);
             alert(`Welcome ${updatedUser.firstName} ${updatedUser.lastName}!`);
             this.router.navigateByUrl("/home");
         }

@@ -18,11 +18,16 @@ a {
 
 a:hover {
     color: white;
+    cursor: pointer;
 }
 
 mat-icon {
     font-family: 'Material Icons' !important;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+button {
+    cursor: pointer;
+}
+
+/* html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */

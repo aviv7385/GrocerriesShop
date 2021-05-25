@@ -1,12 +1,13 @@
 const express = require("express");
 const Product = require("../models/product");
 const productsLogic = require("../business-logic-layer/products-logic");
+const verifyAdmin = require("../middleware/verify-admin");
 
 const router = express.Router(); // Only the routing mechanism for our controller.
 
 
 // POST - add one product (http://localhost:3001/api/admin/products) ** ADMIN access only **
-router.post("/", async (request, response) => {
+router.post("/", verifyAdmin, async (request, response) => {
     try {
         const product = new Product(request.body);
         const addedProduct = await productsLogic.addOneProductAsync(product, request.files ? request.files.image : null);
@@ -18,7 +19,7 @@ router.post("/", async (request, response) => {
 });
 
 // PUT - update full product by id (http://localhost:3001/api/admin/products/3) ** ADMIN access only ***
-router.put("/:productId", async (request, response) => {
+router.put("/:productId", verifyAdmin, async (request, response) => {
     try {
         const product = new Product(request.body);
         product.productId = +request.params.productId;
@@ -35,7 +36,7 @@ router.put("/:productId", async (request, response) => {
 });
 
 // PATCH - update partial product info (http://localhost:3001/api/admin/products/3) ** ADMIN access only ***
-router.patch("/:productId", async (request, response) => {
+router.patch("/:productId", verifyAdmin, async (request, response) => {
     try {
         const product = new Product(request.body);
         product.productId = +request.params.productId;

@@ -17,7 +17,6 @@ export class LoginComponent {
     public async login() {
         try {
             const loggedInUser = await this.authService.login(this.credentials);
-            console.log(loggedInUser);
             alert("Hello " + loggedInUser.firstName + " " + loggedInUser.lastName);
             if (loggedInUser.isAdmin) {
                 this.router.navigateByUrl("/admin");

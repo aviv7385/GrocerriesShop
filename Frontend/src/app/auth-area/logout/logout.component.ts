@@ -15,7 +15,7 @@ export class LogoutComponent implements OnInit {
 
         this.authService.logout(); // logout
 
-        alert("You are now logged out");
+        
         this.router.navigateByUrl("/home"); // redirect to home page
     }
 

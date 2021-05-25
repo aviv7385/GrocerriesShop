@@ -25,7 +25,6 @@ export class RegisterComponent {
             }
             else {
                 const registeredUser = await this.authService.registerStep1(this.user);
-                console.log(registeredUser);
                 this.router.navigateByUrl("/register-step2"); // continue to next step of registration
             }
         }

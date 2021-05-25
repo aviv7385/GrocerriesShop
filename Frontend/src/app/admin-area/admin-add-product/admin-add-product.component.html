@@ -5,3 +5,45 @@
     <a routerLink="/add-product" routerLinkActive="active">Add Product</a>
     &nbsp; &nbsp;
 </nav>
+
+<div class="box">
+    <form #formInfo="ngForm" (submit)="addProduct()">
+
+        <label>Category:</label>
+        <select name="category" id="product.categoryId" [(ngModel)]="product.categoryId" #categoryInfo="ngModel"
+            required>
+            <option selected disabled value="undefined">Select Category</option>
+            <option *ngFor="let c of categories" [value]="c.categoryId">{{c.categoryName}}</option>
+        </select>
+        <span *ngIf="categoryInfo.errors?.required && categoryInfo.touched">Required Field</span>
+        <br>
+
+        <label>Product Name:</label>
+        <input type="text" name="productName" [(ngModel)]="product.productName" #productNameInfo="ngModel" required
+            minlength="2" pattern="^\w+( \w+)*$">
+        <span *ngIf="productNameInfo.errors?.required && productNameInfo.touched">Required Field</span>
+        <span *ngIf="productNameInfo.errors?.minlength">Minimum 2 Letters<br></span>
+        <span *ngIf="productNameInfo.errors?.pattern">Special characters are not allowed</span>
+        <br>
+
+        <label>Price:</label>
+        <input type="number" step="0.01" name="price" [(ngModel)]="product.price" #priceInfo="ngModel" required min="1">
+        <span *ngIf="priceInfo.errors?.required && priceInfo.touched">Required Field</span>
+        <br>
+
+        <!-- <label>Image:</label> -->
+        <!-- hide the input field box. by clicking on the button - act as if the user clicked on the input field by using "Template Reference Variable" -->
+        <input #imageBox type="file" accept="image/*" name="image" (change)="handleImage($event)">
+        <button class="image-btn" type="button" (click)="imageBox.click()">Select Image</button>
+        
+        <!-- only if there is an image - show a preview of it -->
+        <ng-container *ngIf="preview">
+            <img [src]="preview">
+            <br>
+        </ng-container>
+
+        <button [disabled]="formInfo.form.invalid">Add</button>
+        <button type="reset">Reset</button>
+
+    </form>
+</div>

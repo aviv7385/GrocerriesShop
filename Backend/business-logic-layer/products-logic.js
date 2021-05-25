@@ -48,11 +48,11 @@ async function addOneProductAsync(product, image) {
         newFileName = uuid.v4() + extension;
         await image.mv("./images/" + newFileName);
     }
+    product.imageFileName = newFileName;
     const sql = `INSERT INTO products VALUES(DEFAULT, ?,?,?,?)`;
     const values = [product.categoryId, product.productName, product.price, product.imageFileName];
     const info = await dal.executeAsync(sql, values);
     product.productId = info.insertId;
-    product.imageFileName = newFileName;
     return product;
 }
 
