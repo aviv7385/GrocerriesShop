@@ -1,6 +1,8 @@
+import { CategoryModel } from './../../models/category.model';
 import { ProductModel } from 'src/app/models/product.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import store from 'src/app/redux/store';
 
 @Component({
   selector: 'app-admin-product-card',
@@ -11,7 +13,7 @@ export class AdminProductCardComponent implements OnInit {
 
     @Input() // props
     public product: ProductModel;
-
+    
     public imageUrl: string;
 
     public ngOnInit(): void {

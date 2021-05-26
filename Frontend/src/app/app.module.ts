@@ -13,6 +13,7 @@ import { ProductCardComponent } from './products-area/product-card/product-card.
 import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
 import { Page404Component } from './shared-area/page404/page404.component';
 import { LoginComponent } from './auth-area/login/login.component';
 import { LogoutComponent } from './auth-area/logout/logout.component';
@@ -50,7 +51,8 @@ import { AdminEditProductComponent } from './admin-area/admin-edit-product/admin
         FormsModule,
         MatIconModule,
         BrowserAnimationsModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatCardModule
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,

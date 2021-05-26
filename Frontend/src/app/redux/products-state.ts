@@ -42,7 +42,7 @@ export function productsReducer(
             break;
 
         case ProductsActionType.ProductUpdated:
-            const indexToUpdate = newState.products.findIndex(p => p.productId == action.payload.id);
+            const indexToUpdate = newState.products.findIndex(p => p.productId === action.payload.productId);
             newState.products[indexToUpdate] = action.payload; // payload = the updated product
             break;
     }

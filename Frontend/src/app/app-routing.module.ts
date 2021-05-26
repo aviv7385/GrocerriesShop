@@ -14,10 +14,10 @@ import { Register2Component } from './auth-area/register2/register2.component';
 import { AdminAddProductComponent } from './admin-area/admin-add-product/admin-add-product.component';
 
 const routes: Routes = [
-    { path: "home", canActivate:[LoginGuard], component: HomeComponent },
+    { path: "home", component: HomeComponent },
     { path: "products", canActivate:[LoginGuard], component: ProductsListComponent },
     { path: "admin", canActivate:[AdminGuard], component: AdminProductsListComponent },
-    { path: "edit-product", canActivate:[AdminGuard], component: AdminEditProductComponent },
+    { path: "products/:productId", canActivate:[AdminGuard], component: AdminEditProductComponent },
     { path: "add-product", canActivate:[AdminGuard], component: AdminAddProductComponent },
     { path: "register", component: RegisterComponent },
     { path: "register-step2", component: Register2Component },

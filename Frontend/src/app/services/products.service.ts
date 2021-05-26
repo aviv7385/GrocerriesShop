@@ -31,10 +31,34 @@ export class ProductsService {
         myFormData.append("categoryId", product.categoryId.toString());
         myFormData.append("price", product.price.toString());
         myFormData.append("image", product.image);
-        console.log(environment.adminUrl);
         const addedProduct = await this.httpClient.post<ProductModel>(environment.adminUrl, myFormData).toPromise();
-        console.log(addedProduct);
         store.dispatch({ type: ProductsActionType.ProductAdded, payload: addedProduct });
         return addedProduct;
+    }
+
+
+    // get one product
+    public async getOneProduct(productId: number): Promise<ProductModel> {
+        if (store.getState().productsState.products.length === 0) {
+            return await this.httpClient.get<ProductModel>(environment.productsUrl + productId).toPromise();
+        }
+        return store.getState().productsState.products.find(p => p.productId === productId);
+    }
+
+    // update product
+    public async UpdateProduct(productId: number, product: ProductModel): Promise<ProductModel> {
+        if (store.getState().productsState.products.length === 0){
+            this.getAllProducts();
+        }
+        const myFormData = new FormData();
+        myFormData.append("productName", product.productName);
+        myFormData.append("categoryId", product.categoryId.toString());
+        myFormData.append("price", product.price.toString());
+        myFormData.append("image", product.image);
+        
+     
+        const updatedProduct = await this.httpClient.patch<ProductModel>(environment.adminUrl + productId, myFormData).toPromise();
+        store.dispatch({ type: ProductsActionType.ProductUpdated, payload: updatedProduct });
+        return updatedProduct;
     }
 }
