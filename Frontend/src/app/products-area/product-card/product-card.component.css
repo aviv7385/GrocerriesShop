@@ -26,3 +26,22 @@ img {
 mat-icon > a:hover {
     color: red;
 }
+
+form > button {
+    padding: 10px;
+    width: 100px;
+    border-radius: 5px;
+    font-size: large;
+    margin: 20px;
+}
+
+
+
+input {
+    
+    border-radius: 5px;
+    text-align: left;
+    margin: auto;
+    padding: 10px;
+    width: 100px;
+}

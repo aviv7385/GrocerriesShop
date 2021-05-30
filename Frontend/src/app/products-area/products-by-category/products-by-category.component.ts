@@ -54,7 +54,7 @@ export class ProductsByCategoryComponent implements OnInit {
             const categoryId = +this.activatedRoute.snapshot.params.categoryId;
             console.log(categoryId);
 
-            // get al products
+            // get all products
             this.products = await this.productsService.getAllProducts();
             // filter the products array so that the new array will include only the products which belong to the wanted category
             this.productsByCategory = this.products.filter(p => p.categoryId === categoryId);

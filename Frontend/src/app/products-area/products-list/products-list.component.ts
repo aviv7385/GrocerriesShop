@@ -11,6 +11,7 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductsListComponent implements OnInit {
 
     public products: ProductModel[];
+    
 
     public constructor(private pageTitle: Title, private productsService: ProductsService) { }
    
@@ -21,6 +22,7 @@ export class ProductsListComponent implements OnInit {
         try {
             this.products = await this.productsService.getAllProducts();
             console.log(this.products);
+
         }
         catch(err) {
             alert(err.message);

@@ -75,6 +75,8 @@ export function authReducer(currentState: AuthState = new AuthState(), action: A
         case AuthActionType.UserLoggedOut:
             newState.user = null;
             sessionStorage.removeItem("user"); // delete user from session storage
+            sessionStorage.removeItem("cartItems"); // delete cartItems from session storage
+            sessionStorage.removeItem("shoppingCart"); // delete shoppingCart from session storage
             break;
     }
 

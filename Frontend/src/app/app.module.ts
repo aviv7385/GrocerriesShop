@@ -28,7 +28,10 @@ import { AdminEditProductComponent } from './admin-area/admin-edit-product/admin
 import { ProductsByCategoryComponent } from './products-area/products-by-category/products-by-category.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-//import { CategoriesMenuComponent } from './products-area/categories-menu/categories-menu.component';
+import { MatDialogModule } from '@angular/material/dialog'
+import { AddToCartComponent } from './carts-area/add-to-cart/add-to-cart.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DisplayCartComponent } from './carts-area/display-cart/display-cart.component';
 
 @NgModule({
     declarations: [
@@ -48,8 +51,9 @@ import { MatButtonModule } from '@angular/material/button';
         AdminProductsListComponent,
         AdminAddProductComponent,
         AdminEditProductComponent,
-        ProductsByCategoryComponent
-        //CategoriesMenuComponent
+        ProductsByCategoryComponent,
+        AddToCartComponent,
+        DisplayCartComponent
         //CategoriesListComponent
     ],
     imports: [
@@ -62,7 +66,9 @@ import { MatButtonModule } from '@angular/material/button';
         MatTooltipModule,
         MatCardModule,
         MatMenuModule,
-        MatButtonModule
+        MatButtonModule,
+        MatDialogModule,
+        NgbModule
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,

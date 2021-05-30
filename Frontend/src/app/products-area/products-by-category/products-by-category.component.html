@@ -1,12 +1,11 @@
 <div>
     <br><br>
-    
-    <ng-container *ngIf="!user.isAdmin">
+
+    <ng-container *ngIf="user && !user.isAdmin">
         <app-product-card *ngFor="let p of productsByCategory" [product]="p"></app-product-card>
     </ng-container>
 
-    <ng-container *ngIf="user.isAdmin">
+    <ng-container *ngIf="user && user.isAdmin">
         <app-admin-product-card *ngFor="let p of productsByCategory" [product]="p"></app-admin-product-card>
     </ng-container>
 </div>
-

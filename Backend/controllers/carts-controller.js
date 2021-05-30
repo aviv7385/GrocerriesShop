@@ -9,6 +9,7 @@ const router = express.Router(); // Only the routing mechanism for our controlle
 router.post("/", async (request, response) => {
     try {
         const addedCart = await cartsLogic.addNewCartAsync(request.body);
+        console.log(addedCart)
         response.status(201).json(addedCart);
     }
     catch (err) {
@@ -16,16 +17,16 @@ router.post("/", async (request, response) => {
     }
 });
 
-// // GET - get all carts (http://localhost:3001/api/carts) ** LoggedIn User access only **
-// router.get("/", async (request, response) => {
-//     try {
-//         const carts = await cartsLogic.getAllCartsAsync();
-//         response.json(carts);
-//     }
-//     catch (err) {
-//         response.status(500).send(err.message);
-//     }
-// })
+// GET - get all carts (http://localhost:3001/api/carts) ** LoggedIn User access only **
+router.get("/", async (request, response) => {
+    try {
+        const shoppingCarts = await cartsLogic.getAllShoppingCartsAsync();
+        response.json(shoppingCarts);
+    }
+    catch (err) {
+        response.status(500).send(err.message);
+    }
+})
 
 // POST - add one item to the cart (http://localhost:3001/api/carts/items) ** LoggedIn User access only **
 router.post("/items", async (request, response) => {

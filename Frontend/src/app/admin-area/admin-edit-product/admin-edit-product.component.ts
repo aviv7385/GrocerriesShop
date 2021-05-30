@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductModel } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { environment } from 'src/environments/environment';
-import store from 'src/app/redux/store';
+
 
 @Component({
     selector: 'app-admin-edit-product',

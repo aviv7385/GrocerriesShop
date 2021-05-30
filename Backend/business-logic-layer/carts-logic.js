@@ -4,9 +4,17 @@ const dal = require("../data-access-layer/dal");
 async function addNewCartAsync(cart) {
     const sql = `INSERT INTO shoppingcarts VALUES(DEFAULT, ?,?)`;
     const values = [cart.userId, cart.date];
+    console.log(values);
     const info = await dal.executeAsync(sql, values);
     cart.cartId = info.insertId;
     return cart;
+}
+
+// get all shopping carts
+async function getAllShoppingCartsAsync(){
+    const sql = `SELECT * FROM shoppingcarts`;
+    const shoppingCarts = await dal.executeAsync(sql);
+    return shoppingCarts;
 }
 
 // add new item to the cart
@@ -18,15 +26,12 @@ async function addNewItemAsync(item) {
     return item;
 }
 
-// // get all carts 
-// async function getAllCartsAsync() {
-//     const sql = `SELECT SC.cartId, SC.userId, SC.date, SUM(CI.totalPrice) AS totalCartPrice 
-//                 FROM shoppingcarts AS SC LEFT JOIN cartitems AS CI
-//                 ON SC.cartId=CI.cartId
-//                 GROUP BY SC.cartId`;
-//     const carts = await dal.executeAsync(sql);
-//     return carts;
-// }
+// check if item is already in the cart
+async function checkIfItemInCartAsync(productId, cartId){
+    const sql = `SELECT * FROM cartitems WHERE productId=${productId} AND cartId=${cartId}`;
+    const isItemInCart = await dal.executeAsync(sql);
+    return isItemInCart;
+}
 
 // get all cart items 
 async function getAllCartItemsAsync(cartId) {
@@ -67,5 +72,7 @@ module.exports = {
     getAllCartItemsAsync,
     getTotalPriceAsync,
     deleteCartItemAsync,
-    updateQuantityOfItem
+    updateQuantityOfItem,
+    getAllShoppingCartsAsync,
+    checkIfItemInCartAsync
 }

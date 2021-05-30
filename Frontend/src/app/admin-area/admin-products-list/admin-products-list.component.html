@@ -1,6 +1,12 @@
+
+
+
 <div>
     <img *ngIf="!products" src="/assets/loading/loading.gif" alt="loading...">
 
     <br>
     <app-admin-product-card *ngFor="let p of products" [product]="p"></app-admin-product-card>
 </div>
+
+
+

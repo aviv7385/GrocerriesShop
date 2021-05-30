@@ -7,9 +7,36 @@
         <p class="price">
             Price: {{product.price | currency}} &nbsp; &nbsp;
             <mat-icon matTooltip="add to shopping cart">
-                <a>add_shopping_cart</a>
+                <a (click)="open(content)">add_shopping_cart</a>
             </mat-icon>
         </p>
     </mat-card-content>
 
 </mat-card>
+
+<!-- popup dialog -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Quantity</h4>
+        <button type="button" class="close btn btn-outline-dark" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <form #formInfo="ngForm" (submit)="addItemToCart()">
+           
+            <input type="number" name="quantity" [(ngModel)]="cartItem.quantity" #quantityInfo="ngModel" required
+                min="1">
+
+            <button class="btn btn-outline-dark" (click)="modal.close('Save click')">Submit</button>
+
+        </form>
+
+    </div>
+
+</ng-template>
+
+
+
+<!-- <pre>{{ closeResult }}</pre> -->

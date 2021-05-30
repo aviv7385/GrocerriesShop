@@ -22,10 +22,10 @@ export class AuthService {
 
     // update user (register step 2):
     public async registerStep2(userId: number, user: UserModel): Promise<UserModel> {
-        if (store.getState().authState.users.length === 0){
+        if (store.getState().authState.users.length === 0) {
             this.getAllUsers();
         }
-        const updatedUser = await this.httpClient.patch<UserModel>(environment.authUrl+"register/"+userId, user).toPromise();
+        const updatedUser = await this.httpClient.patch<UserModel>(environment.authUrl + "register/" + userId, user).toPromise();
         store.dispatch(UserUpdatedAction(updatedUser));
         return updatedUser;
     }

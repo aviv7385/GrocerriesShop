@@ -1,4 +1,18 @@
+<app-add-to-cart></app-add-to-cart>
 
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#myCart"
+    aria-controls="myCart">Show My Cart</button>
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+    id="myCart" aria-labelledby="myCartLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="myCartLabel">My Cart</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <app-display-cart></app-display-cart>
+    </div>
+</div>
 
 <div>
     <img *ngIf="!products" src="/assets/loading/loading.gif" alt="loading...">
