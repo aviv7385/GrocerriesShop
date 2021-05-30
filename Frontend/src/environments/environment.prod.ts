@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   adminUrl: "http://localhost:3001/api/admin/products/",
   productsUrl: "http://localhost:3001/api/products/",
+  categoriesUrl: "http://localhost:3001/api/products/categories",
   authUrl: "http://localhost:3001/api/auth/",
   usersUrl: "http://localhost:3001/api/users/",
   cartsUrl: "http://localhost:3001/api/carts/",  

@@ -1,29 +1,12 @@
-<!-- <div class="box">
 
-    <a routerLink="/products/{{product.productId}}">
-        <img [src]="imageUrl">
-    </a>
-    <div class="text">
-        {{product.productName}}
-        <br>
-        Price: {{product.price | currency}}
-        <button matTooltip="edit product">
-            <mat-icon>    
-                <a routerLink="/products/{{product.productId}}">edit</a>
-            </mat-icon>
-        </button>
-    </div>
-</div> -->
 
 <mat-card class="example-card">
     <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{product.productName}}</mat-card-title>
+        <mat-card-title class="title">{{product.productName}}</mat-card-title>
     </mat-card-header>
     <img mat-card-image [src]="imageUrl" alt="{{product.productName}}">
     <mat-card-content>
-        <br>
-        <p>
+        <p class="price">
             Price: {{product.price | currency}} &nbsp; &nbsp;
             <mat-icon matTooltip="edit product">
                 <a routerLink="/products/{{product.productId}}">edit</a>

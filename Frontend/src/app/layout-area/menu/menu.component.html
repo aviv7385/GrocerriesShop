@@ -16,7 +16,17 @@
             <a routerLink="/add-product" routerLinkActive="active">Add Product</a>
             &nbsp; &nbsp;
         </ng-container>
+
+        <!-- if user is logged in - show the drop-down menu for categories -->
+        <ng-container *ngIf="user">
+            <a mat-a [matMenuTriggerFor]="menu">Categories</a>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let c of categories"
+                    routerLink="/products/categories/{{c.categoryId}}">{{c.categoryName}}</button>
+            </mat-menu>
+        </ng-container>
     </nav>
+
 </div>
 
 <div class="right-menu">

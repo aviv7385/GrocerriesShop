@@ -2,7 +2,7 @@ import { ProductModel } from "../models/product.model";
 
 export class ProductsState {
     public products: ProductModel[] = [];
-
+   
     // On page refresh - load saved products back to state: 
     public constructor() {
         const products = JSON.parse(sessionStorage.getItem("products"));
@@ -49,6 +49,6 @@ export function productsReducer(
 
     // Save products also in sessionStorage:
     sessionStorage.setItem("products", JSON.stringify(newState.products));
-    
+
     return newState; // Return the newState.
 }

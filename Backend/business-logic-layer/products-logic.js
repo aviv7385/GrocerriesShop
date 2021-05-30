@@ -3,7 +3,7 @@ const dal = require("../data-access-layer/dal");
 
 // get all categories
 async function getAllCategoriesAsync() {
-    const sql = `SELECT * FROM categories`;
+    const sql = `SELECT * FROM categories ORDER BY categoryName ASC`;
     const categories = await dal.executeAsync(sql);
     return categories;
 }
@@ -107,7 +107,6 @@ module.exports = {
     getAllProductsAsync,
     getAllProductsByCategoryAsync,
     getAllCategoriesAsync,
-    //getOneCategoryAsync,
     getOneProductAsync,
     addOneProductAsync,
     editFullProductAsync,

@@ -1,4 +1,4 @@
-import { ProductsActionType } from './../redux/products-state';
+import { ProductsActionType, productsReducer } from './../redux/products-state';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -47,7 +47,7 @@ export class ProductsService {
 
     // update product
     public async UpdateProduct(productId: number, product: ProductModel): Promise<ProductModel> {
-        if (store.getState().productsState.products.length === 0){
+        if (store.getState().productsState.products.length === 0) {
             this.getAllProducts();
         }
         const myFormData = new FormData();
@@ -55,10 +55,11 @@ export class ProductsService {
         myFormData.append("categoryId", product.categoryId.toString());
         myFormData.append("price", product.price.toString());
         myFormData.append("image", product.image);
-        
-     
+
         const updatedProduct = await this.httpClient.patch<ProductModel>(environment.adminUrl + productId, myFormData).toPromise();
         store.dispatch({ type: ProductsActionType.ProductUpdated, payload: updatedProduct });
         return updatedProduct;
     }
+
+
 }

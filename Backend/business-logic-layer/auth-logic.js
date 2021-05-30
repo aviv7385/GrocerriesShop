@@ -39,7 +39,7 @@ async function loginAsync(credentials) {
     // Hash user password: 
     credentials.password = cryptoHelper.hash(credentials.password);
 
-    const sql = `SELECT userId, idNumber, firstName, lastName, email, C.city, street, isAdmin 
+    const sql = `SELECT userId, firstName, lastName, email, C.city, street, isAdmin 
                 FROM users AS U JOIN cities as C
                 ON U.cityId=C.cityId
                 WHERE email = ? AND password = ?`;

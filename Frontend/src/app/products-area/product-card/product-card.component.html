@@ -1,14 +1,15 @@
-<div class="box">
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title class="title">{{product.productName}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="imageUrl" alt="{{product.productName}}">
+    <mat-card-content>
+        <p class="price">
+            Price: {{product.price | currency}} &nbsp; &nbsp;
+            <mat-icon matTooltip="add to shopping cart">
+                <a>add_shopping_cart</a>
+            </mat-icon>
+        </p>
+    </mat-card-content>
 
-    <a routerLink="/products/{{product.productId}}">
-        <img [src]="imageUrl">
-    </a>
-    <div class="text">
-        {{product.productName}}
-        <br>
-        Price: {{product.price | currency}}
-        <button matTooltip="add to shopping cart">
-            <mat-icon>add_shopping_cart</mat-icon>
-        </button>
-    </div>
-</div>
+</mat-card>

@@ -1,3 +1,4 @@
+//import { CategoriesListComponent } from './products-area/categories-list/categories-list.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +25,10 @@ import { AdminProductCardComponent } from './admin-area/admin-product-card/admin
 import { AdminProductsListComponent } from './admin-area/admin-products-list/admin-products-list.component';
 import { AdminAddProductComponent } from './admin-area/admin-add-product/admin-add-product.component';
 import { AdminEditProductComponent } from './admin-area/admin-edit-product/admin-edit-product.component';
+import { ProductsByCategoryComponent } from './products-area/products-by-category/products-by-category.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+//import { CategoriesMenuComponent } from './products-area/categories-menu/categories-menu.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +48,9 @@ import { AdminEditProductComponent } from './admin-area/admin-edit-product/admin
         AdminProductsListComponent,
         AdminAddProductComponent,
         AdminEditProductComponent,
+        ProductsByCategoryComponent
+        //CategoriesMenuComponent
+        //CategoriesListComponent
     ],
     imports: [
         BrowserModule,
@@ -52,7 +60,9 @@ import { AdminEditProductComponent } from './admin-area/admin-edit-product/admin
         MatIconModule,
         BrowserAnimationsModule,
         MatTooltipModule,
-        MatCardModule
+        MatCardModule,
+        MatMenuModule,
+        MatButtonModule
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,
