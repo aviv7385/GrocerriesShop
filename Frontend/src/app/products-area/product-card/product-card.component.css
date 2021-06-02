@@ -4,12 +4,13 @@
     display: inline-block;
     margin: 10px;
     vertical-align: bottom;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px gray;
 }
 
 .title {
     font-size: 12pt;
 }
-
 
 img {
     max-width: 100px;
@@ -23,8 +24,12 @@ img {
     letter-spacing: 2px;
 }
 
+mat-icon {
+    color: #c0b3c2;
+}
+
 mat-icon > a:hover {
-    color: red;
+    color: #ff94c2;
 }
 
 form > button {
@@ -35,13 +40,11 @@ form > button {
     margin: 20px;
 }
 
-
-
-input {
-    
+input {   
     border-radius: 5px;
     text-align: left;
     margin: auto;
     padding: 10px;
     width: 100px;
 }
+

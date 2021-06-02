@@ -1,22 +1,28 @@
-<app-add-to-cart></app-add-to-cart>
 
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#myCart"
-    aria-controls="myCart">Show My Cart</button>
+    <app-add-to-cart></app-add-to-cart>
 
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-    id="myCart" aria-labelledby="myCartLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="myCartLabel">My Cart</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <!-- when clicking on the "show cart" button, open a slider to the left with all the products in the user's cart -->
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="myCart"
+        aria-labelledby="myCartLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="myCartLabel">My Cart</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <app-display-cart></app-display-cart>
+        </div>
     </div>
-    <div class="offcanvas-body">
-        <app-display-cart></app-display-cart>
+
+
+    <div class="products-container">
+        <div id="cart-button">
+            <button mat-raised-button color="accent" matTooltip="Display My Cart" (click)="displayCart()"
+                data-bs-toggle="offcanvas" data-bs-target="#myCart" aria-controls="myCart">
+                Go To Cart
+                <mat-icon>shopping_cart</mat-icon>
+            </button>
+        </div>
+        <img *ngIf="!products" src="/assets/loading/loading.gif" alt="loading...">
+        <br>
+        <app-product-card *ngFor="let p of products" [product]="p"></app-product-card>
     </div>
-</div>
-
-<div>
-    <img *ngIf="!products" src="/assets/loading/loading.gif" alt="loading...">
-    <br>
-    <app-product-card *ngFor="let p of products" [product]="p"></app-product-card>
-</div>
-

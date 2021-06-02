@@ -17,7 +17,10 @@ async function getAllCategoriesAsync() {
 
 // get all products
 async function getAllProductsAsync() {
-    const sql = `SELECT * FROM products`;
+    const sql = `SELECT productId, P.categoryId, C.categoryName, productName, price, imageFileName 
+                FROM products AS P JOIN categories AS C 
+                ON P.categoryId=C.categoryId
+                ORDER BY productName`;
     const products = await dal.executeAsync(sql);
     return products;
 }

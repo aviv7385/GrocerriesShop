@@ -13,7 +13,7 @@
     <span *ngIf="passwordInfo.errors?.required && passwordInfo.touched">Required Field</span>
     <br><br>
 
-    <button [disabled]="formInfo.form.invalid">Login</button>
+    <button [disabled]="formInfo.form.invalid" mat-raised-button color="accent">Login</button>
 </form>
 <br>
 <p>Not registered yet? Join us <a routerLink="/register">HERE!</a></p>

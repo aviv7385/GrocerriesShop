@@ -1,7 +1,6 @@
 const express = require("express");
 const cartsLogic = require("../business-logic-layer/carts-logic");
 const CartItem = require("../models/cart-item");
-const verifyLoggedIn = require("../middleware/verify-logged-in");
 
 const router = express.Router(); // Only the routing mechanism for our controller.
 
@@ -40,6 +39,18 @@ router.post("/items", async (request, response) => {
     }
 });
 
+// GET one item 
+router.get("/items/:itemId", async (request, response) => {
+    try {
+        const itemId = +request.params.itemId;
+        const item = await cartsLogic.getOneCartItemAsync(itemId);
+        response.json(item);
+    }
+    catch (err) {
+        response.status(500).send(err.message);
+    }
+})
+
 // GET all items from a cart (http://localhost:3001/api/carts/1) ** LoggedIn User access only **
 router.get("/:cartId", async (request, response) => {
     try {
@@ -69,12 +80,11 @@ router.get("/total-price/:cartId", async (request, response) => {
 });
 
 
-// DELETE - remove one item from a specific cart (http://localhost:3001/api/carts/items/6/12) ** LoggedIn User access only **
-router.delete("/items/:cartId/:itemId", async (request, response) => {
+// DELETE - remove one item from a specific cart (http://localhost:3001/api/carts/items/6/) ** LoggedIn User access only **
+router.delete("/items/:itemId", async (request, response) => {
     try {
-        const cartId = +request.params.cartId;
         const itemId = +request.params.itemId;
-        await cartsLogic.deleteCartItemAsync(cartId, itemId);
+        await cartsLogic.deleteCartItemAsync(itemId);
         response.sendStatus(204);
     }
     catch (err) {

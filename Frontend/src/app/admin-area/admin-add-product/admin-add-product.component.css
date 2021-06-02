@@ -40,7 +40,7 @@ button {
 }
 
 button:hover {
-    background-color: lightseagreen
+    background-color: lightpink
 }
 
 span {
@@ -58,7 +58,7 @@ img {
 }
 
 .image-btn {
-    background-color: white;
+    
     width: 320px;
     padding: 10px;
     font-size: large;

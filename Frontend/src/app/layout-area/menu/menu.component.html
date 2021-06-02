@@ -13,8 +13,6 @@
         <ng-container *ngIf="user && user.isAdmin">
             <a routerLink="/admin" routerLinkActive="active">Products</a>
             &nbsp; &nbsp;
-            <a routerLink="/add-product" routerLinkActive="active">Add Product</a>
-            &nbsp; &nbsp;
         </ng-container>
 
         <!-- if user is logged in - show the drop-down menu for categories -->
@@ -24,6 +22,12 @@
                 <button mat-menu-item *ngFor="let c of categories"
                     routerLink="/products/categories/{{c.categoryId}}">{{c.categoryName}}</button>
             </mat-menu>
+            &nbsp; &nbsp;
+        </ng-container>
+
+        <ng-container *ngIf="user && user.isAdmin">
+            <a routerLink="/add-product" routerLinkActive="active">Add Product</a>
+            &nbsp; &nbsp;
         </ng-container>
     </nav>
 

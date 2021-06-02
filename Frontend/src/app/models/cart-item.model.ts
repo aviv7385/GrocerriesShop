@@ -3,5 +3,10 @@ export class CartItemModel {
     public productId: number;
     public cartId: number;
     public quantity: number;
-    public totalPrice: number;  
+    public productName: string;
+    public price: number;
+    public totalPrice: number;
+    public imageFileName: string;
+    public image: File;
+    public totalCartPrice: number;
 }

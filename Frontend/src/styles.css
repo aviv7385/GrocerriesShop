@@ -5,19 +5,19 @@ html, body {
     padding: 0;
     height: 100%;
     text-align: center;
-    color: darkslategrey;
-    background-image: linear-gradient(45deg, lightgrey, lightblue );
+    color: #ba2d65;
+    background-color: #f3e5f5;
     font-family: 'Noto Sans JP', sans-serif;
 }
 
 a {
-    color: darkslateblue;
+    color: #ba2d65;
     text-decoration: none;
     font-weight: 400;
 }
 
 a:hover {
-    color: white;
+    color: #8e24aa;
     cursor: pointer;
 }
 
@@ -30,7 +30,7 @@ button {
 }
 
 .active {
-    color: white;
+    color: #ad1457;
     font-weight: bold;
 }
 

@@ -27,6 +27,6 @@
     <input id="confirm-password" type="password" required>
     <br><br>
 
-    <button [disabled]="formInfo.form.invalid" (click)="getValueFromInput()">Continue</button>
+    <button mat-raised-button color="accent" [disabled]="formInfo.form.invalid" (click)="getValueFromInput()">Continue</button>
 </form>
 </div>

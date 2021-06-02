@@ -16,6 +16,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProductCardComponent implements OnInit {
 
+    
     @Input() // props
     public product: ProductModel;
     public imageUrl: string;
@@ -59,6 +60,7 @@ export class ProductCardComponent implements OnInit {
         });
     }
 
+    // close the popup dialog
     private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
             return 'by pressing ESC';
@@ -68,4 +70,5 @@ export class ProductCardComponent implements OnInit {
             return `with: ${reason}`;
         }
     }
+
 }

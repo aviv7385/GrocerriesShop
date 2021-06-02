@@ -6,7 +6,7 @@ export class CartsState {
     public cartItems: CartItemModel[] = [];
     public cartItem: CartItemModel;
     public shoppingCart: ShoppingCartModel = null;
-    //public shoppingCarts: ShoppingCartModel[] = [];
+    
 
     // On page refresh - load saved cart and cart items back to state: 
     public constructor() {
@@ -49,12 +49,8 @@ export function cartsReducer(
         case CartsActionType.CartItemsDownloaded:
             newState.cartItems = action.payload;
             // Save cartItems also in sessionStorage:
-            sessionStorage.setItem("cartItems", JSON.stringify(newState.cartItems));
+            //sessionStorage.setItem("cartItems", JSON.stringify(newState.cartItems));
             break;
-
-        // case CartsActionType.ShoppingCartsDownloaded:
-        //     newState.shoppingCarts = action.payload; // payload = all carts
-        //     break;
 
         case CartsActionType.ShoppingCartCreated:
             newState.shoppingCart = action.payload; // payload = the added cart
@@ -67,14 +63,12 @@ export function cartsReducer(
             break;
 
         case CartsActionType.CartItemDeleted:
-            const indexToDelete = newState.cartItems.findIndex((i) => {
-                i.itemId === action.payload.itemId && i.cartId == action.payload.cartId
-            }); // payload = the deleted cart item's id
+            const indexToDelete = newState.cartItems.findIndex(i => i.itemId === action.payload.itemId); // payload = the deleted cart item's id
             newState.cartItems.splice(indexToDelete, 1);
             break;
 
         case CartsActionType.CartItemUpdated:
-            const indexToUpdate = newState.cartItems.findIndex(i => i.itemId === action.payload.itemId);
+            const indexToUpdate = newState.cartItems.findIndex(i => i.itemId === action.payload);
             newState.cartItems[indexToUpdate] = action.payload; // payload = the updated cart item
             break;
     }

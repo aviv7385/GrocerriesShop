@@ -35,6 +35,6 @@
         <span *ngIf="streetInfo.errors?.pattern">Please type digits and English letters</span>
         <br><br>
 
-        <button [disabled]="formInfo.form.invalid">Finish Registration</button>
+        <button  mat-raised-button color="accent"[disabled]="formInfo.form.invalid">Finish Registration</button>
     </form>
 </div>

@@ -1,6 +1,44 @@
+<div class="cart" *ngIf="shoppingCart">
 
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Price</th>
+            </tr>
 
-<div *ngFor="let i of cartItems">
-    {{i.totalPrice}}
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of cartItems">
+                <td>
+                    <button id="remove" mat-icon-button color="accent" (click)="removeOneItem(i.itemId)">
+                        <span class="tooltiptext">Remove</span>
+                        <mat-icon>
+                            delete
+                        </mat-icon>
+                    </button>
+                </td>
+                <td>{{i.productName}}</td>
+                <td>{{i.quantity}}</td>
+                <td>{{i.price}}</td>
+                <td>{{i.totalPrice}}</td>
+            </tr>
+        </tbody>
 
+    </table>
+
+    <br>
+    <div *ngIf="totalCartPrice" class="total">
+        <p>Total Cart Price: {{totalCartPrice.totalCartPrice | currency}} &nbsp;&nbsp;
+            <button mat-stroked-button color="accent" data-bs-toggle="offcanvas" data-bs-target="#myCart"
+                aria-controls="myCart">
+                <mat-icon>delete_sweep</mat-icon>
+                Delete All Items
+            </button>
+        </p>
+
+    </div>
 </div>

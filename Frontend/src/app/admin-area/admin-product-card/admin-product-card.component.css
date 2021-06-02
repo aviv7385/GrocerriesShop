@@ -4,6 +4,8 @@
     display: inline-block;
     margin: 10px;
     vertical-align: bottom;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px gray;
 }
 
 .title {
@@ -23,6 +25,10 @@ img {
     letter-spacing: 2px;
 }
 
+mat-icon {
+    color: #f3e5f5;
+}
+
 mat-icon > a:hover {
-    color: red;
+    color: #ff94c2;
 }

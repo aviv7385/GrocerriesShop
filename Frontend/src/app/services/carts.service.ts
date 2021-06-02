@@ -16,10 +16,9 @@ export class CartsService {
 
     // get all cart items
     public async getAllCartItems(cartId: number): Promise<CartItemModel[]> {
-        if (store.getState().cartsState.cartItems.length === 0) {
-            const cartItems = await this.httpClient.get<CartItemModel[]>(environment.cartsUrl + cartId).toPromise();
-            store.dispatch({ type: CartsActionType.CartItemsDownloaded, payload: cartItems });
-        }
+        const cartItems = await this.httpClient.get<CartItemModel[]>(environment.cartsUrl + cartId).toPromise();
+        store.dispatch({ type: CartsActionType.CartItemsDownloaded, payload: cartItems });
+        console.log(store.getState().cartsState.cartItems);
         return store.getState().cartsState.cartItems;
     }
 
@@ -44,4 +43,19 @@ export class CartsService {
         store.dispatch({ type: CartsActionType.CartItemAdded, payload: addedItem });
         return addedItem;
     }
+
+    // get total price of all cart items
+    public async getTotalCartPrice(cartId: number): Promise<CartItemModel> {
+        const totalCartPrice = await this.httpClient.get<CartItemModel>(environment.cartsUrl + "total-price/" + cartId).toPromise();
+        return totalCartPrice;
+    }
+
+    // delete one item /items/:itemId
+    public async deleteOneItem(itemId: number) {
+        await this.httpClient.delete<CartItemModel>(environment.cartsUrl + "items/" + itemId).toPromise();
+        console.log(itemId);
+        store.dispatch({ type: CartsActionType.CartItemDeleted, payload: itemId });
+    }
+
+    // delete all items from a cart
 }

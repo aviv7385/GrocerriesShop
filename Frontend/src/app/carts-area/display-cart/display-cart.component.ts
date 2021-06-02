@@ -1,8 +1,9 @@
 import { ErrorsService } from './../../services/errors.service';
 import { CartItemModel } from './../../models/cart-item.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CartsService } from 'src/app/services/carts.service';
 import store from 'src/app/redux/store';
+import {Router } from '@angular/router';
 
 @Component({
     selector: 'app-display-cart',
@@ -11,16 +12,20 @@ import store from 'src/app/redux/store';
 })
 export class DisplayCartComponent implements OnInit {
 
-    public products = store.getState().productsState.products;
+    public totalCartPrice: any;
     public cartItems: CartItemModel[];
     public shoppingCart = store.getState().cartsState.shoppingCart;
-
-    constructor(private cartsService: CartsService, private errorsService: ErrorsService) { }
+   
+    constructor(private router: Router, private cartsService: CartsService, private errorsService: ErrorsService) {}
 
     public async ngOnInit() {
         try {
-            this.cartItems = await this.cartsService.getAllCartItems(this.shoppingCart.cartId);
-            console.log(this.cartItems);
+            if (this.shoppingCart) {
+                this.cartItems = await this.cartsService.getAllCartItems(this.shoppingCart.cartId);
+            }
+            if (this.cartItems) {
+                this.totalCartPrice = await this.cartsService.getTotalCartPrice(this.shoppingCart.cartId);
+            }
         }
         catch (err) {
             alert(this.errorsService.getError(err));
@@ -28,4 +33,20 @@ export class DisplayCartComponent implements OnInit {
         }
     }
 
+    public async removeOneItem(cartItemId: number) {
+        try {
+            const answer = window.confirm(`Are you sure you want to remove this item from your cart?`);
+            if (!answer) {
+                return;
+            }
+            await this.cartsService.deleteOneItem(cartItemId)
+
+            this.ngOnInit();// reload this component
+
+        }
+        catch (err) {
+            alert(this.errorsService.getError(err));
+            console.log(err);
+        }
+    }
 }

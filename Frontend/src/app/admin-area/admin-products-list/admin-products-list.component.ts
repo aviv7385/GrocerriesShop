@@ -2,6 +2,7 @@ import { ProductModel } from 'src/app/models/product.model';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ProductsService } from 'src/app/services/products.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-products-list',
@@ -10,9 +11,21 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class AdminProductsListComponent implements OnInit {
 
+    public mySubscription: any;
     public products: ProductModel[];
 
-    public constructor(private pageTitle: Title, private productsService: ProductsService) { }
+    public constructor(private router: Router,private pageTitle: Title, private productsService: ProductsService) { 
+        // reload the component
+        this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false;
+          };
+          this.mySubscription = this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+              // Trick the Router into believing it's last link wasn't previously loaded
+              this.router.navigated = false;
+            }
+          });
+    }
    
     public async ngOnInit() {
         this.pageTitle.setTitle("Admin Area");
@@ -27,5 +40,11 @@ export class AdminProductsListComponent implements OnInit {
             console.log(err);
         }
     }
+
+    ngOnDestroy() {
+        if (this.mySubscription) {
+          this.mySubscription.unsubscribe();
+        }
+      }
 
 }

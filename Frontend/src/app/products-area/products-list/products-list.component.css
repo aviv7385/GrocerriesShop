@@ -1,5 +1,17 @@
-div {
+.products-container {
     width: 80%;
     margin: auto;
     padding: 10px;
+    text-align: center;
 }
+
+#cart-button {
+    width: fit-content;
+    margin-left: 85%;
+}
+
+
+#myCart {
+    min-width: 40%;
+}
+

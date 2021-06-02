@@ -30,7 +30,7 @@
             <!-- <label>Image:</label> -->
             <!-- hide the input field box. by clicking on the button - act as if the user clicked on the input field by using "Template Reference Variable" -->
             <input #imageBox type="file" accept="image/*" name="image" (change)="handleImage($event)">
-            <button class="image-btn" type="button" (click)="imageBox.click()">Select Image</button>
+            <button mat-raised-button color="accent" class="image-btn" type="button" (click)="imageBox.click()">Select Image</button>
             
             <!-- only if there is an image - show a preview of it -->
             <ng-container *ngIf="preview">
@@ -38,8 +38,8 @@
                 <br>
             </ng-container>
     
-            <button [disabled]="formInfo.form.invalid">Save</button>
-            <button type="reset">Reset</button>
+            <button mat-raised-button color="accent" [disabled]="formInfo.form.invalid">Save</button>
+            <button mat-raised-button color="accent" type="reset">Reset</button>
     
         </form>
     </div>
