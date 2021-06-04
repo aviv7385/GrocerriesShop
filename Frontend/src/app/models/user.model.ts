@@ -6,6 +6,7 @@ export class UserModel {
     public email: string;
     public password: string;
     public cityId: number;
+    public city: string;
     public street: string;
     public isAdmin: boolean;
     public token: string;

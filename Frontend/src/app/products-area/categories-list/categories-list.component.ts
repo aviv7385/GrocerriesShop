@@ -1,10 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { CategoryModel } from 'src/app/models/category.model';
-import { ProductModel } from 'src/app/models/product.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ErrorsService } from 'src/app/services/errors.service';
-import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
     selector: 'app-categories-list',

@@ -1,12 +1,10 @@
-import { ProductsByCategoryComponent } from './../../products-area/products-by-category/products-by-category.component';
 import { CategoryModel } from './../../models/category.model';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { Unsubscribe } from 'redux';
 import { UserModel } from 'src/app/models/user.model';
 import store from 'src/app/redux/store';
 import { CategoriesService } from 'src/app/services/categories.service';
-import { ActivatedRoute } from '@angular/router';
-import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { ErrorsService } from 'src/app/services/errors.service';
 
 @Component({
     selector: 'app-menu',
@@ -20,7 +18,7 @@ export class MenuComponent implements OnInit {
     public categories: CategoryModel[];
     public unsubscribeStore: Unsubscribe;
 
-    constructor(private categoriesService: CategoriesService, private activatedRoute: ActivatedRoute) {
+    constructor(private categoriesService: CategoriesService, private errorsService: ErrorsService) {
         this.unsubscribeStore = store.subscribe(() => {
             this.user = store.getState().authState.user;
         });
@@ -35,7 +33,8 @@ export class MenuComponent implements OnInit {
             this.categories = await this.categoriesService.getAllCategories();
         }
         catch (err) {
-            alert(err.error);
+            alert(this.errorsService.getError(err));
+
             console.log(err);
         }
 

@@ -1,12 +1,13 @@
+import { CartsActionType } from './../../redux/carts-state';
 import { Component, Input, OnInit } from '@angular/core';
 import { CartItemModel } from 'src/app/models/cart-item.model';
 import { ProductModel } from 'src/app/models/product.model';
-import { ShoppingCartModel } from 'src/app/models/shopping-cart.model';
 import store from 'src/app/redux/store';
 import { CartsService } from 'src/app/services/carts.service';
 import { ErrorsService } from 'src/app/services/errors.service';
 import { environment } from 'src/environments/environment';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Unsubscribe } from 'redux';
 
 
 @Component({
@@ -20,14 +21,21 @@ export class ProductCardComponent implements OnInit {
     @Input() // props
     public product: ProductModel;
     public imageUrl: string;
-    public shoppingCart = store.getState().cartsState.shoppingCart;
+    public shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
     public cartItem = new CartItemModel();
     public cartItems: CartItemModel[];
     public user = store.getState().authState.user;
     public closeResult = '';
+    public totalCartPrice: number;
+    private unsubscribeStore: Unsubscribe;
+    
 
-    constructor(private modalService: NgbModal, private errorsService: ErrorsService, private cartsService: CartsService) { }
-
+    constructor(private modalService: NgbModal, private errorsService: ErrorsService, private cartsService: CartsService) {
+        this.unsubscribeStore = store.subscribe(() => { // Start listening for changes.
+            this.cartItems = store.getState().cartsState.cartItems;
+            //this.totalCartPrice = store.getState().cartsState.cartTotalPrice;
+        });
+     }
 
     public async ngOnInit() {
         try {
@@ -44,8 +52,10 @@ export class ProductCardComponent implements OnInit {
         try {
             const addedItem = await this.cartsService.addCartItem(this.cartItem, this.product.productId, this.cartItem.quantity);
             console.log(addedItem);
-            window.location.reload();
 
+            const totalPriceInfo = await this.cartsService.getTotalCartPrice(this.shoppingCart.cartId);
+            this.totalCartPrice = totalPriceInfo.totalCartPrice
+            store.dispatch({type: CartsActionType.CartTotalPrice, payload: this.totalCartPrice})
         }
         catch (err) {
             alert(this.errorsService.getError(err));
@@ -73,4 +83,7 @@ export class ProductCardComponent implements OnInit {
         }
     }
 
+    public ngOnDestroy(): void {
+        this.unsubscribeStore();
+    }
 }

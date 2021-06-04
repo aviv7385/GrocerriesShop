@@ -4,6 +4,7 @@ import { CityModel } from 'src/app/models/city.model';
 import { UserModel } from 'src/app/models/user.model';
 import store from 'src/app/redux/store';
 import { AuthService } from 'src/app/services/auth.service';
+import { ErrorsService } from 'src/app/services/errors.service';
 
 @Component({
     selector: 'app-register2',
@@ -16,17 +17,17 @@ export class Register2Component implements OnInit {
     public userId = store.getState().authState.user.userId;
     public cities: CityModel[];
 
-    constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) { }
+    constructor(private errorsService: ErrorsService, private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
     // get list of cities
     public async ngOnInit() {
         try {
             // get all cities (to display in the "select" box)
-            this.cities = await this.authService.getCitiesList();            
+            this.cities = await this.authService.getCitiesList();
         }
         catch (err) {
             console.log(err);
-            alert(err.statusText);
+            alert(this.errorsService.getError(err));
         }
     }
 
@@ -37,7 +38,7 @@ export class Register2Component implements OnInit {
             this.router.navigateByUrl("/home");
         }
         catch (err) {
-            alert(err.error);
+            alert(this.errorsService.getError(err));
             console.log(err);
         }
     }

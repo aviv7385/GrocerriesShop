@@ -5,8 +5,8 @@ import { CartItemModel } from './../models/cart-item.model';
 export class CartsState {
     public cartItems: CartItemModel[] = [];
     public cartItem: CartItemModel;
-    public shoppingCart: ShoppingCartModel = null;
-    //public shoppingCarts: ShoppingCartModel[] = [];
+    public shoppingCart: ShoppingCartModel;
+    public cartTotalPrice: number;
 
     // On page refresh - load saved cart and cart items back to state: 
     public constructor() {
@@ -24,10 +24,9 @@ export class CartsState {
 // Carts Action Types: 
 export enum CartsActionType {
     ShoppingCartCreated = "ShoppingCartCreated",
-    // ShoppingCartsDownloaded = "ShoppingCartsDownloaded",
     CartItemAdded = "CartItemAdded",
     CartItemsDownloaded = "CartItemsDownloaded",
-    //CartTotalPrice = "CartTotalPrice",
+    CartTotalPrice = "CartTotalPrice",
     CartItemDeleted = "CartItemDeleted", // only one item was deleted
     CartItemsDeleted = "CartItemsDeleted", // all cart items wee deleted
     CartItemUpdated = "CartItemUpdated"
@@ -50,10 +49,6 @@ export function cartsReducer(
         case CartsActionType.CartItemsDownloaded:
             newState.cartItems = action.payload;
             break;
-
-        // case CartsActionType.ShoppingCartsDownloaded:
-        //     newState.shoppingCarts = action.payload;
-        //     break;
 
         case CartsActionType.ShoppingCartCreated:
             newState.shoppingCart = action.payload; // payload = the added cart
@@ -78,6 +73,10 @@ export function cartsReducer(
         case CartsActionType.CartItemUpdated:
             const indexToUpdate = newState.cartItems.findIndex(i => i.itemId === action.payload);
             newState.cartItems[indexToUpdate] = action.payload; // payload = the updated cart item
+            break;
+
+        case CartsActionType.CartTotalPrice:
+            newState.cartTotalPrice = action.payload;
             break;
     }
 

@@ -3,7 +3,6 @@ import { CartItemModel } from './../../models/cart-item.model';
 import { ShoppingCartModel } from './../../models/shopping-cart.model';
 import { Component, Input, OnInit } from '@angular/core';
 import store from 'src/app/redux/store';
-import { CartsService } from 'src/app/services/carts.service';
 import { ProductModel } from 'src/app/models/product.model';
 
 @Component({
@@ -22,7 +21,7 @@ export class AddToCartComponent implements OnInit {
     public user = store.getState().authState.user;
     public shoppingCarts: ShoppingCartModel[];
 
-    constructor(private errorsService: ErrorsService, private cartsService: CartsService) { }
+    constructor(private errorsService: ErrorsService) { }
 
     public async ngOnInit() {
         try {

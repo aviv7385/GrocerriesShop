@@ -15,8 +15,8 @@ router.post("/", async (request, response) => {
     }
 });
 
-// GET - get details of a final order - for the receipt (http://localhost:3001/api/orders/18) ** LoggedIn User access only **
-router.get("/:orderId", async (request, response) => {
+// GET - get details of a final order - for the receipt (http://localhost:3001/api/orders/receipt/18) ** LoggedIn User access only **
+router.get("/receipt/:orderId", async (request, response) => {
     try {
         const orderId = +request.params.orderId;
         const order = await ordersLogic.getOrderDetailsAsync(orderId);

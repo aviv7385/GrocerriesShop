@@ -28,7 +28,7 @@ export class AdminEditProductComponent implements OnInit {
         try {
             // get the product id from the url: 
             const productId = +this.activatedRoute.snapshot.params.productId;
-           
+
             // get the specific product's details from the store
             this.product = await this.productsService.getOneProduct(productId);
 
@@ -39,7 +39,7 @@ export class AdminEditProductComponent implements OnInit {
             this.imageUrl = environment.productsUrl + "images/" + this.product.imageFileName;
         }
         catch (err) {
-            this.errorsService.getError(err);
+            alert(this.errorsService.getError(err));
         }
     }
 
@@ -63,7 +63,7 @@ export class AdminEditProductComponent implements OnInit {
             this.router.navigateByUrl("/admin"); // redirect
         }
         catch (err) {
-            this.errorsService.getError(err);
+            alert(this.errorsService.getError(err));
         }
     }
 

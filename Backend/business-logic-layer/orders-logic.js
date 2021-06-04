@@ -5,10 +5,9 @@ const cartsLogic = require("./carts-logic");
 
 // add new order
 async function addNewOrderAsync(order) {
-    const sql = `INSERT INTO orders(orderId, userId, cartId, shippingCity, shippingStreet, shippingDate, orderDate, cc4Digits) 
+    const sql = `INSERT INTO orders(orderId, userId, cartId, cityId, shippingStreet, shippingDate, orderDate, cc4Digits) 
                 VALUES(DEFAULT, ?, ?, ?, ?, ?, DEFAULT, RIGHT(${order.cc4Digits}, 4))`;
-    const values = [order.userId, order.cartId, order.shippingCity,
-    order.shippingStreet, order.shippingDate];
+    const values = [order.userId, order.cartId, order.cityId, order.shippingStreet, order.shippingDate];
     const info = await dal.executeAsync(sql, values);
     order.orderId = info.insertId;
     // get the final price of the cart from the "cartitems" table
@@ -58,5 +57,5 @@ module.exports = {
     getOrderDetailsAsync,
     getOrderFinalPriceAsync,
     getOneOrderAsync,
-    getAllOrders 
+    getAllOrders
 }

@@ -4,7 +4,7 @@ import { CartItemModel } from './../../models/cart-item.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { CartsService } from 'src/app/services/carts.service';
 import store from 'src/app/redux/store';
-import { Router } from '@angular/router';
+import { Unsubscribe } from 'redux';
 
 @Component({
     selector: 'app-display-cart',
@@ -13,13 +13,19 @@ import { Router } from '@angular/router';
 })
 export class DisplayCartComponent implements OnInit {
 
-    public totalCartPrice: any;
+    public totalCartPrice: number;
     public user = store.getState().authState.user;
     public cartItems: CartItemModel[];
     public shoppingCart = store.getState().cartsState.shoppingCart;
     public shoppingCarts: ShoppingCartModel[];
+    private unsubscribeStore: Unsubscribe;
 
-    constructor(private router: Router, private cartsService: CartsService, private errorsService: ErrorsService) { }
+    constructor(private cartsService: CartsService, private errorsService: ErrorsService) {
+        this.unsubscribeStore = store.subscribe(() => { // Start listening for changes.
+            this.cartItems = store.getState().cartsState.cartItems;
+            this.totalCartPrice = store.getState().cartsState.cartTotalPrice;
+        });
+    }
 
     public async ngOnInit() {
         try {
@@ -27,7 +33,8 @@ export class DisplayCartComponent implements OnInit {
                 this.cartItems = await this.cartsService.getAllCartItems(this.shoppingCart.cartId);
             }
             if (this.cartItems) {
-                this.totalCartPrice = await this.cartsService.getTotalCartPrice(this.shoppingCart.cartId);
+                const totalPriceInfo = await this.cartsService.getTotalCartPrice(this.shoppingCart.cartId);
+                this.totalCartPrice = totalPriceInfo.totalCartPrice;
             }
         }
         catch (err) {
@@ -67,5 +74,9 @@ export class DisplayCartComponent implements OnInit {
             alert(this.errorsService.getError(err));
             console.log(err);
         }
+    }
+
+    public ngOnDestroy(): void {
+        this.unsubscribeStore();
     }
 }

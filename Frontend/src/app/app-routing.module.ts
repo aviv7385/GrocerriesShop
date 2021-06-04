@@ -14,6 +14,7 @@ import { Page404Component } from './shared-area/page404/page404.component';
 import { Register2Component } from './auth-area/register2/register2.component';
 import { AdminAddProductComponent } from './admin-area/admin-add-product/admin-add-product.component';
 import { AddToCartComponent } from './carts-area/add-to-cart/add-to-cart.component';
+import { CloseOrderComponent } from './carts-area/close-order/close-order.component';
 
 const routes: Routes = [
     { path: "home", component: HomeComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
     { path: "login", component: LoginComponent },
     { path: "logout", component: LogoutComponent },
     { path: "carts", component: AddToCartComponent },
+    { path: "order", canActivate: [LoginGuard], component: CloseOrderComponent },
     { path: "", redirectTo: "/home", pathMatch: "full" }, // default route
     { path: "**", component: Page404Component } // page not found
 ];

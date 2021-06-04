@@ -34,6 +34,9 @@ import { DisplayCartComponent } from './carts-area/display-cart/display-cart.com
 import { TotalProductsComponent } from './products-area/total-products/total-products.component';
 import { OpenCartComponent } from './carts-area/open-cart/open-cart.component';
 import { AboutComponent } from './layout-area/about/about.component';
+import { CloseOrderComponent } from './carts-area/close-order/close-order.component';
+import { ShowCartComponent } from './carts-area/show-cart/show-cart.component';
+import { ShippingDetailsComponent } from './carts-area/shipping-details/shipping-details.component';
 
 @NgModule({
     declarations: [
@@ -58,7 +61,10 @@ import { AboutComponent } from './layout-area/about/about.component';
         DisplayCartComponent,
         TotalProductsComponent,
         OpenCartComponent,
-        AboutComponent   
+        AboutComponent,
+        CloseOrderComponent,
+        ShowCartComponent,
+        ShippingDetailsComponent   
     ],
     imports: [
         BrowserModule,

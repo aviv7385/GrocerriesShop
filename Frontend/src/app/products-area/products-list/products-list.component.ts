@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { CartItemModel } from 'src/app/models/cart-item.model';
 import { ProductModel } from 'src/app/models/product.model';
-import store from 'src/app/redux/store';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -15,17 +14,17 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductsListComponent implements OnInit {
 
-    public mySubscription: any;
+    public subscription: any;
     public products: ProductModel[];
     public cartItems: CartItemModel[];
-    public shoppingCart = store.getState().cartsState.shoppingCart;
+    public shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
 
     public constructor(private router: Router, private cartsService: CartsService, private pageTitle: Title, private productsService: ProductsService, private errorsService: ErrorsService) {
         // reload the component
         this.router.routeReuseStrategy.shouldReuseRoute = function () {
             return false;
         };
-        this.mySubscription = this.router.events.subscribe((event) => {
+        this.subscription = this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 // Trick the Router into believing it's last link wasn't previously loaded
                 this.router.navigated = false;
@@ -38,12 +37,16 @@ export class ProductsListComponent implements OnInit {
 
         // get data from the server using Redux + service
         try {
+            // get all products from the server
             this.products = await this.productsService.getAllProducts();
-            console.log(this.products);
 
+            // get all items that are currently in an open cart (from the server)
+            if (this.shoppingCart) {
+                this.cartItems = await this.cartsService.getAllCartItems(this.shoppingCart.cartId);
+            }
         }
         catch (err) {
-            alert(err.message);
+            alert(this.errorsService.getError(err));
             console.log(err);
         }
     }
@@ -63,11 +66,11 @@ export class ProductsListComponent implements OnInit {
     }
 
     ngOnDestroy() {
-        if (this.mySubscription) {
-            this.mySubscription.unsubscribe();
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
     }
 
-  
+
 
 }

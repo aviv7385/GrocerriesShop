@@ -40,10 +40,15 @@ export function ordersReducer(
         case OrdersActionType.OrderDownloaded:
             newState.order = action.payload;
             break;
+
+        case OrdersActionType.OrderAdded:
+            newState.orders.push(action.payload); // payload = the added order
+            break;
+
     }
 
     // save in session storage:
-   // sessionStorage.setItem("order", JSON.stringify(newState.order));
+    // sessionStorage.setItem("order", JSON.stringify(newState.order));
 
     return newState; // Return the newState.
 

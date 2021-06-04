@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CredentialsModel } from 'src/app/models/credentials.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { ErrorsService } from 'src/app/services/errors.service';
 
 @Component({
     selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent {
 
     public credentials = new CredentialsModel();
 
-    public constructor(private authService: AuthService, private router: Router) { }
+    public constructor(private errorsService: ErrorsService,private authService: AuthService, private router: Router) { }
 
     public async login() {
         try {
@@ -27,7 +28,7 @@ export class LoginComponent {
             }
         }
         catch (err) {
-            alert(err.error);
+            alert(this.errorsService.getError(err));
             console.log(err);
         }
     }

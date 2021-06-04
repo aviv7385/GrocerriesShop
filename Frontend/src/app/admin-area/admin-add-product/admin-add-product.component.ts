@@ -1,3 +1,4 @@
+import { ErrorsService } from './../../services/errors.service';
 import { CategoryModel } from './../../models/category.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -16,7 +17,7 @@ export class AdminAddProductComponent implements OnInit {
     public product = new ProductModel();
     public preview: string; // image preview
 
-    constructor(private productsService: ProductsService, private categoriesService: CategoriesService, private router: Router) { }
+    constructor(private errorsService: ErrorsService, private productsService: ProductsService, private categoriesService: CategoriesService, private router: Router) { }
 
     // get list of categories for the select box
     public async ngOnInit() {
@@ -26,7 +27,7 @@ export class AdminAddProductComponent implements OnInit {
         }
         catch (err) {
             console.log(err);
-            alert(err.statusText);
+            alert(this.errorsService.getError(err));
         }
     }
 
@@ -47,7 +48,7 @@ export class AdminAddProductComponent implements OnInit {
         }
         catch (err) {
             console.log(err);
-            alert(err.message);
+            alert(this.errorsService.getError(err));
         }
     }
 

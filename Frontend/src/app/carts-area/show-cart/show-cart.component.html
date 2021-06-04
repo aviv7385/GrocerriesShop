@@ -1,0 +1,31 @@
+<div class="cart" *ngIf="cartItems && cartItems.length > 0">
+
+    <table>
+        <thead>
+            <tr>
+
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Price</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of cartItems">
+
+                <td>{{i.productName}}</td>
+                <td>{{i.quantity}}</td>
+                <td>{{i.price}}</td>
+                <td>{{i.totalPrice}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <hr>
+    <div *ngIf="totalCartPrice" class="total">
+        <p>Total Cart Price: {{totalCartPrice.totalCartPrice | currency}} &nbsp;&nbsp;</p>
+    </div>
+
+</div>

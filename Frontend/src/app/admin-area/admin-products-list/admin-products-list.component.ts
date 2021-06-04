@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ProductsService } from 'src/app/services/products.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { ErrorsService } from 'src/app/services/errors.service';
 
 @Component({
   selector: 'app-admin-products-list',
@@ -14,7 +15,7 @@ export class AdminProductsListComponent implements OnInit {
     public mySubscription: any;
     public products: ProductModel[];
 
-    public constructor(private router: Router,private pageTitle: Title, private productsService: ProductsService) { 
+    public constructor(private errorsService: ErrorsService,private router: Router,private pageTitle: Title, private productsService: ProductsService) { 
         // reload the component
         this.router.routeReuseStrategy.shouldReuseRoute = function () {
             return false;
@@ -36,7 +37,7 @@ export class AdminProductsListComponent implements OnInit {
             console.log(this.products);
         }
         catch(err) {
-            alert(err.message);
+            alert(this.errorsService.getError(err));
             console.log(err);
         }
     }

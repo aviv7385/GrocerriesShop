@@ -41,7 +41,8 @@ export class CartsService {
 
     // add an item to the cart
     public async addCartItem(cartItem: CartItemModel, productId: number, quantity: number): Promise<CartItemModel> {
-        cartItem.cartId = store.getState().cartsState.shoppingCart.cartId;
+        const shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
+        cartItem.cartId = shoppingCart.cartId;
         cartItem.productId = productId;
         cartItem.quantity = quantity;
         const addedItem = await this.httpClient.post<CartItemModel>(environment.cartsUrl + "items", cartItem).toPromise();
@@ -52,6 +53,7 @@ export class CartsService {
     // get total price of all cart items
     public async getTotalCartPrice(cartId: number): Promise<CartItemModel> {
         const totalCartPrice = await this.httpClient.get<CartItemModel>(environment.cartsUrl + "total-price/" + cartId).toPromise();
+        store.dispatch({type: CartsActionType.CartTotalPrice, payload: totalCartPrice});
         return totalCartPrice;
     }
 
@@ -70,7 +72,7 @@ export class CartsService {
     // when cart is ordered (when the order is closed) - update the isOrdered column (in shoppingcarts table) from "false" to "true"
     public async updateIsOrdered(shoppingCart: ShoppingCartModel): Promise<ShoppingCartModel> {
         shoppingCart.isOrdered = true;
-        const updatedShoppingCart = await this.httpClient.patch<ShoppingCartModel>(environment.ordersUrl + "is-ordered/" + shoppingCart.cartId, shoppingCart).toPromise();
+        const updatedShoppingCart = await this.httpClient.patch<ShoppingCartModel>(environment.cartsUrl + "is-ordered/" + shoppingCart.cartId, shoppingCart).toPromise();
         return updatedShoppingCart;
     }
 

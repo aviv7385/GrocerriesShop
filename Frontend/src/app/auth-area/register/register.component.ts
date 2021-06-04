@@ -1,3 +1,4 @@
+import { ErrorsService } from './../../services/errors.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/user.model';
@@ -13,7 +14,7 @@ export class RegisterComponent {
     public user = new UserModel();
     public isPasswordConfirmed: boolean = false;
 
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private errorsService: ErrorsService,private authService: AuthService, private router: Router) { }
 
     // send data of new user to the server
     public async register() {
@@ -29,7 +30,7 @@ export class RegisterComponent {
             }
         }
         catch (err) {
-            alert(err.error);
+            alert(this.errorsService.getError(err));
             console.log(err);
         }
     }

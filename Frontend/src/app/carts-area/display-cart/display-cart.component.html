@@ -1,4 +1,4 @@
-<div class="cart" *ngIf="shoppingCart">
+<div class="cart" *ngIf="cartItems && cartItems.length > 0">
 
     <table>
         <thead>
@@ -32,14 +32,19 @@
 
     <br>
     <div *ngIf="totalCartPrice" class="total">
-        <p>Total Cart Price: {{totalCartPrice.totalCartPrice | currency}} &nbsp;&nbsp;
-            <button (click)="removeAllItems(shoppingCart.cartId)" mat-stroked-button color="accent" data-bs-toggle="offcanvas" data-bs-target="#myCart"
-                aria-controls="myCart">
+        <p>Total Cart Price: {{totalCartPrice | currency}} &nbsp;&nbsp;
+            <button (click)="removeAllItems(shoppingCart.cartId)" mat-stroked-button color="accent"
+                data-bs-toggle="offcanvas" data-bs-target="#myCart" aria-controls="myCart">
                 <mat-icon>delete_sweep</mat-icon>
                 Delete All Items
             </button>
+            <button mat-stroked-button color="accent" a routerLink="/order">
+                <mat-icon>done</mat-icon> Order
+            </button>
+
         </p>
     </div>
 
-   
+
+
 </div>

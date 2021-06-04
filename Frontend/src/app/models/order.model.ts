@@ -3,7 +3,7 @@ export class OrderModel {
     public cartId: number;
     public userId: number;
     public finalPrice: number;
-    public shippingCity: string;
+    public cityId: number;
     public shippingStreet: string;
     public shippingDate: Date;
     public orderDate: Date; // date stamp

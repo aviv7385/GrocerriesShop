@@ -8,13 +8,6 @@ async function getAllCategoriesAsync() {
     return categories;
 }
 
-// // get one category by category id
-// async function getOneCategoryAsync(categoryId) {
-//     const sql = `SELECT * FROM categories WHERE categoryId=${categoryId}`;
-//     const category = await dal.executeAsync(sql);
-//     return category[0];
-// }
-
 // get all products
 async function getAllProductsAsync() {
     const sql = `SELECT productId, P.categoryId, C.categoryName, productName, price, imageFileName 

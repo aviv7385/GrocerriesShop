@@ -1,6 +1,6 @@
 import { CategoryModel } from 'src/app/models/category.model';
 import { ProductModel } from './../../models/product.model';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ErrorsService } from 'src/app/services/errors.service';
@@ -8,7 +8,6 @@ import { ProductsService } from 'src/app/services/products.service';
 import store from 'src/app/redux/store';
 import { UserModel } from 'src/app/models/user.model';
 import { Unsubscribe } from 'redux';
-import { EventEmitterService } from 'src/app/services/event-emitter.service';
 
 @Component({
     selector: 'app-products-by-category',
@@ -46,7 +45,6 @@ export class ProductsByCategoryComponent implements OnInit {
     public ngOnDestroy(): void {
         this.unsubscribeStore();
     }
-
 
     public async getProducts() {
         try {

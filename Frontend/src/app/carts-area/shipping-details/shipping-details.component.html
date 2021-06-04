@@ -1,0 +1,39 @@
+<div>
+    <form #formInfo="ngForm" (submit)="submitOrder()">
+
+        <label>City:</label>
+        <select name="city" id="order.cityId" [(ngModel)]="order.cityId" #cityInfo="ngModel" required>
+            <option selected value="undefined" disabled>Select City</option>
+            <option *ngFor="let c of cities" [value]="c.cityId">{{c.city}}</option>
+        </select>
+        <span *ngIf="cityInfo.errors?.required">Required Field</span>
+        <br>
+
+        <label>Street:</label>
+        <input type="text" name="shippingStreet" [(ngModel)]="order.shippingStreet" #shippingStreetInfo="ngModel"
+            required pattern="^\S[\w \b_./+-]*$" minlength="5" (dblclick)="getUserStreet()">
+        <span *ngIf="shippingStreetInfo.errors?.required && shippingStreetInfo.touched">Required Field</span>
+        <span *ngIf="shippingStreetInfo.errors?.minlength">Minimum 5 Characters<br></span>
+        <span *ngIf="shippingStreetInfo.errors?.pattern">Please type digits and English letters</span>
+        <br>
+
+        <label>Shipping Date:</label>
+        <input type="date" name="shippingDate" [(ngModel)]="order.shippingDate" #shippingDateInfo="ngModel"
+            min="{{minDate}}" required>
+        <span *ngIf="shippingDateInfo.errors?.required && shippingDateInfo.touched">Required Field</span>
+        <br>
+
+        <label>Credit Card:</label>
+        <input type="text" name="cc4Digits" [(ngModel)]="order.cc4Digits" #cc4DigitsInfo="ngModel" required
+            pattern="^\d+$" minlength="8" maxlength="16">
+        <span *ngIf="cc4DigitsInfo.errors?.required && cc4DigitsInfo.touched">Required Field</span>
+        <span *ngIf="cc4DigitsInfo.errors?.minlength">Minimum 8 Digits<br></span>
+        <span *ngIf="cc4DigitsInfo.errors?.pattern">Please type digits only</span>
+        <br>
+
+        <button mat-raised-button color="accent" [disabled]="formInfo.form.invalid">Submit</button>
+        <button mat-raised-button type="reset">Reset</button>
+
+
+    </form>
+</div>
