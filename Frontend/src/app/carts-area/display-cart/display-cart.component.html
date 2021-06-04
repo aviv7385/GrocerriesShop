@@ -33,12 +33,13 @@
     <br>
     <div *ngIf="totalCartPrice" class="total">
         <p>Total Cart Price: {{totalCartPrice.totalCartPrice | currency}} &nbsp;&nbsp;
-            <button mat-stroked-button color="accent" data-bs-toggle="offcanvas" data-bs-target="#myCart"
+            <button (click)="removeAllItems(shoppingCart.cartId)" mat-stroked-button color="accent" data-bs-toggle="offcanvas" data-bs-target="#myCart"
                 aria-controls="myCart">
                 <mat-icon>delete_sweep</mat-icon>
                 Delete All Items
             </button>
         </p>
-
     </div>
+
+   
 </div>

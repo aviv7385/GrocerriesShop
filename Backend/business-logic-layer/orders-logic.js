@@ -20,6 +20,20 @@ async function addNewOrderAsync(order) {
     return order;
 }
 
+// get one order by cartId
+async function getOneOrderAsync(cartId) {
+    const sql = `SELECT * FROM orders WHERE cartId=${cartId}`;
+    const order = await dal.executeAsync(sql);
+    return order;
+}
+
+// get all orders
+async function getAllOrders() {
+    const sql = `SELECT * FROM orders`;
+    const orders = await dal.executeAsync(sql);
+    return orders;
+}
+
 // get order details (to create a receipt)
 async function getOrderDetailsAsync(orderId) {
     const sql = `SELECT products.productName, cartitems.quantity, 
@@ -42,5 +56,7 @@ async function getOrderFinalPriceAsync(orderId) {
 module.exports = {
     addNewOrderAsync,
     getOrderDetailsAsync,
-    getOrderFinalPriceAsync
+    getOrderFinalPriceAsync,
+    getOneOrderAsync,
+    getAllOrders 
 }

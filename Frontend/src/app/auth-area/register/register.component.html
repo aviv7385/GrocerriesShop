@@ -1,32 +1,37 @@
 <h2>Register</h2>
 
-<div class="box">
-<form #formInfo="ngForm" (submit)="register()">
+<div>
+    <form #formInfo="ngForm" (submit)="register()">
 
-    <label>ID Number:</label>
-    <input type="text" name="idNumber" [(ngModel)]="user.idNumber" #idNumberInfo="ngModel" required pattern="^\d+$" minlength="9" maxlength="9">
-    <span *ngIf="idNumberInfo.errors?.required && idNumberInfo.touched">Required Field</span>
-    <span *ngIf="idNumberInfo.errors?.pattern">ID must contain only digits<br></span>
-    <span *ngIf="idNumberInfo.errors?.minlength">ID Number must contain 9 digits</span>
-    <br><br>
+        <label>ID Number:</label>
+        <input type="text" name="idNumber" [(ngModel)]="user.idNumber" #idNumberInfo="ngModel" required pattern="^\d+$"
+            minlength="9" maxlength="9">
+        <span *ngIf="idNumberInfo.errors?.required && idNumberInfo.touched">Required Field</span>
+        <span *ngIf="idNumberInfo.errors?.pattern">ID must contain only digits<br></span>
+        <span *ngIf="idNumberInfo.errors?.minlength">ID Number must contain 9 digits</span>
+        <br><br>
 
-    <label>Email:</label>
-    <input type="email" name="email" [(ngModel)]="user.email" #emailInfo="ngModel" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
-    <span *ngIf="emailInfo.errors?.required && emailInfo.touched">Required Field</span>
-    <span *ngIf="emailInfo.errors?.pattern">Please enter a valid email (example@domain.com)</span>
-    <br><br>
+        <label>Email:</label>
+        <input type="email" name="email" [(ngModel)]="user.email" #emailInfo="ngModel" required
+            pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$">
+        <span *ngIf="emailInfo.errors?.required && emailInfo.touched">Required Field</span>
+        <span *ngIf="emailInfo.errors?.pattern">Please enter a valid email (example@domain.com)</span>
+        <br><br>
 
-    <label>Password:</label>
-    <input id="password" type="password" name="password" [(ngModel)]="user.password" #passwordInfo="ngModel" required pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" minlength="6">
-    <span *ngIf="passwordInfo.errors?.required && passwordInfo.touched">Required Field</span>
-    <span *ngIf="passwordInfo.errors?.minlength">Password must contain at least 6 characters <br></span>
-    <span *ngIf="passwordInfo.errors?.pattern">Password must contain at least 1 digit and at least 1 letter <br></span>
-    <br><br>
+        <label>Password:</label>
+        <input id="password" type="password" name="password" [(ngModel)]="user.password" #passwordInfo="ngModel"
+            required pattern="^(?=.*\d)(?=.*[a-zA-Z]).{6,}$" minlength="6">
+        <span *ngIf="passwordInfo.errors?.required && passwordInfo.touched">Required Field</span>
+        <span *ngIf="passwordInfo.errors?.minlength">Password must contain at least 6 characters <br></span>
+        <span *ngIf="passwordInfo.errors?.pattern">Password must contain at least 1 digit and at least 1 letter
+            <br></span>
+        <br><br>
 
-    <label>Confirm Password:</label>
-    <input id="confirm-password" type="password" required>
-    <br><br>
+        <label>Confirm Password:</label>
+        <input id="confirm-password" type="password" required>
+        <br><br>
 
-    <button mat-raised-button color="accent" [disabled]="formInfo.form.invalid" (click)="getValueFromInput()">Continue</button>
-</form>
+        <button mat-raised-button color="accent" [disabled]="formInfo.form.invalid"
+            (click)="getValueFromInput()">Continue</button>
+    </form>
 </div>

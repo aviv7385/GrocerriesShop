@@ -6,7 +6,7 @@ const verifyLoggedIn = require("../middleware/verify-logged-in");
 const router = express.Router(); // Only the routing mechanism for our controller.
 
 // GET all categories (http://localhost:3001/api/products/categories)
-router.get("/categories", verifyLoggedIn, async (request, response) => {
+router.get("/categories", async (request, response) => {
     try {
         const categories = await productsLogic.getAllCategoriesAsync();
         response.json(categories);
@@ -30,7 +30,7 @@ router.get("/categories/:categoryId", verifyLoggedIn, async (request, response) 
 });
 
 // GET all products (http://localhost:3001/api/products)
-router.get("/", verifyLoggedIn, async (request, response) => {
+router.get("/", async (request, response) => {
     try {
         const products = await productsLogic.getAllProductsAsync();
         response.json(products);

@@ -77,6 +77,8 @@ export function authReducer(currentState: AuthState = new AuthState(), action: A
             sessionStorage.removeItem("user"); // delete user from session storage
             sessionStorage.removeItem("cartItems"); // delete cartItems from session storage
             sessionStorage.removeItem("shoppingCart"); // delete shoppingCart from session storage
+            sessionStorage.removeItem("products");
+            sessionStorage.removeItem("categories");
             break;
     }
 

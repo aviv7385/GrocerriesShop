@@ -56,10 +56,6 @@ router.get("/:cartId", async (request, response) => {
     try {
         const cartId = +request.params.cartId;
         const items = await cartsLogic.getAllCartItemsAsync(cartId);
-        if (items.length === 0) {
-            response.status(404).send(`cart is empty or not found`);
-            return;
-        }
         response.json(items);
     }
     catch (err) {
@@ -92,6 +88,32 @@ router.delete("/items/:itemId", async (request, response) => {
     }
 });
 
+// DELETE all items from a specific cart (http://localhost:3001/api/carts/remove-items/1)
+router.delete("/remove-items/:cartId", async (request, response) => {
+    try {
+        const cartId = +request.params.cartId;
+        console.log(cartId);
+        await cartsLogic.deleteAllItemsFromACartAsync(cartId);
+        response.sendStatus(204);
+
+    }
+    catch (err) {
+        response.status(500).send(err.message);
+    }
+});
+
+// DELETE entire cart (http://localhost:3001/api/carts/remove-cart/1)
+router.delete("/remove-cart/:cartId", async (request, response) => {
+    try {
+        const cartId = +request.params.cartId;
+        await cartsLogic.deleteEntireShoppingCart(cartId);
+        response.sendStatus(204);
+    }
+    catch (err) {
+        response.status(500).send(err.message);
+    }
+});
+
 // PATCH - update the quantity of an item (http://localhost:3001/api/carts/items-quantity/12) ** LoggedIn User access only **
 router.patch("/items-quantity/:itemId", async (request, response) => {
     try {
@@ -104,6 +126,23 @@ router.patch("/items-quantity/:itemId", async (request, response) => {
             return;
         }
         response.json(updatedCartItem);
+    }
+    catch (err) {
+        response.status(500).send(err.message);
+    }
+});
+
+// PATCH - update isOrdered (http://localhost:3001/api/carts/is-ordered/8){
+router.patch("/is-ordered/:cartId", async (request, response) => {
+    try {
+        const shoppingCart = request.body;
+        shoppingCart.cartId = +request.params.cartId;
+        const updatedCart = await cartsLogic.isOrderedAsync(shoppingCart);
+        if (!updatedCart) {
+            response.status(404).send(`id ${updatedCart.cartId} not found.`);
+            return;
+        }
+        response.json(updatedCart);
     }
     catch (err) {
         response.status(500).send(err.message);

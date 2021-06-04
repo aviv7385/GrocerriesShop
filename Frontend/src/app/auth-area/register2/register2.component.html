@@ -1,6 +1,6 @@
 <h2>Register</h2>
 
-<div class="box">
+<div>
     <form #formInfo="ngForm" (submit)="updateUser()">
 
         <label>First Name:</label>
@@ -13,7 +13,7 @@
 
         <label>Last Name:</label>
         <input type="text" name="lastName" [(ngModel)]="user.lastName" #lastNameInfo="ngModel" required minlength="2"
-            pattern="^[A-Za-z]+$">
+            pattern="^\S[\w \b_./+-]*$">
         <span *ngIf="lastNameInfo.errors?.required && lastNameInfo.touched">Required Field</span>
         <span *ngIf="lastNameInfo.errors?.minlength">Minimum 2 Letters<br></span>
         <span *ngIf="lastNameInfo.errors?.pattern">Please type only English letters</span>
@@ -35,6 +35,6 @@
         <span *ngIf="streetInfo.errors?.pattern">Please type digits and English letters</span>
         <br><br>
 
-        <button  mat-raised-button color="accent"[disabled]="formInfo.form.invalid">Finish Registration</button>
+        <button  mat-raised-button color="accent"[disabled]="formInfo.form.invalid">Submit</button>
     </form>
 </div>

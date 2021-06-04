@@ -16,11 +16,11 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProductCardComponent implements OnInit {
 
-    
+
     @Input() // props
     public product: ProductModel;
     public imageUrl: string;
-    public shoppingCart = new ShoppingCartModel();
+    public shoppingCart = store.getState().cartsState.shoppingCart;
     public cartItem = new CartItemModel();
     public cartItems: CartItemModel[];
     public user = store.getState().authState.user;
@@ -44,6 +44,8 @@ export class ProductCardComponent implements OnInit {
         try {
             const addedItem = await this.cartsService.addCartItem(this.cartItem, this.product.productId, this.cartItem.quantity);
             console.log(addedItem);
+            window.location.reload();
+
         }
         catch (err) {
             alert(this.errorsService.getError(err));

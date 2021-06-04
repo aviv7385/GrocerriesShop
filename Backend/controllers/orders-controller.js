@@ -30,8 +30,6 @@ router.get("/:orderId", async (request, response) => {
         const data = await ordersLogic.getOrderFinalPriceAsync(orderId);
         const finalOrderPrice = "Final Price: " + data[0].finalPrice + "\n";
         fileHandler.saveToFile(newFileName, finalOrderPrice);
-
-
     }
     catch (err) {
         response.status(500).send(err.message);
@@ -39,12 +37,28 @@ router.get("/:orderId", async (request, response) => {
 });
 
 
+// GET one order by cart Id (http://localhost:3001/api/order/18)
+router.get("/:cartId", async (request, response) => {
+    try {
+        const cartId = +request.params.cartId;
+        const order = await ordersLogic.getOneOrderAsync(cartId);
+        response.json(order);
+    }
+    catch (err) {
+        response.status(500).send(err.message);
+    }
+});
 
-
-
-
-
-
+// GET all orders (http://localhost:3001/api/order/)
+router.get("/", async (request, response) => {
+    try {
+        const orders = await ordersLogic.getAllOrders();
+        response.json(orders);
+    }
+    catch (err) {
+        response.status(500).send(err.message);
+    }
+});
 
 
 module.exports = router;

@@ -1,0 +1,19 @@
+<ng-container *ngIf="openCart">
+    <div>
+        <h3>Welcome Back {{user.firstName}}!</h3>
+        <br>
+        <p>You have an open cart<br>
+            Total Price: {{totalCartPrice | currency}}
+            <br> resume your shopping <a routerLink="/products" routerLinkActive="active">HERE</a>
+        </p>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="!openCart">
+    <div>
+    <h3>Welcome {{user.firstName}}!</h3>
+    <br>
+    <p>Ready for your first shopping experience with us?</p>
+    <a routerLink="/products" routerLinkActive="active">Start HERE</a>
+    </div>
+</ng-container>

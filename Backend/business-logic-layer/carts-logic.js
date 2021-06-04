@@ -2,7 +2,7 @@ const dal = require("../data-access-layer/dal");
 
 // create new cart
 async function addNewCartAsync(cart) {
-    const sql = `INSERT INTO shoppingcarts VALUES(DEFAULT, ?,?)`;
+    const sql = `INSERT INTO shoppingcarts VALUES(DEFAULT, ?,?, DEFAULT)`;
     const values = [cart.userId, cart.date];
     const info = await dal.executeAsync(sql, values);
     cart.cartId = info.insertId;
@@ -10,7 +10,7 @@ async function addNewCartAsync(cart) {
 }
 
 // get all shopping carts
-async function getAllShoppingCartsAsync(){
+async function getAllShoppingCartsAsync() {
     const sql = `SELECT * FROM shoppingcarts`;
     const shoppingCarts = await dal.executeAsync(sql);
     return shoppingCarts;
@@ -26,7 +26,7 @@ async function addNewItemAsync(item) {
 }
 
 // check if item is already in the cart
-async function checkIfItemInCartAsync(productId, cartId){
+async function checkIfItemInCartAsync(productId, cartId) {
     const sql = `SELECT * FROM cartitems WHERE productId=${productId} AND cartId=${cartId}`;
     const isItemInCart = await dal.executeAsync(sql);
     return isItemInCart;
@@ -43,7 +43,7 @@ async function getAllCartItemsAsync(cartId) {
 }
 
 // get one cart item
-async function getOneCartItemAsync(itemId){
+async function getOneCartItemAsync(itemId) {
     const sql = `SELECT P.productName, P.price, P.imageFileName, C.cartId, C.quantity, (C.quantity*P.price) AS totalPrice 
                 FROM cartitems AS C JOIN products AS P
                 ON C.productId=P.productId
@@ -68,12 +68,33 @@ async function deleteCartItemAsync(itemId) {
     await dal.executeAsync(sql);
 }
 
+// delete all items from a cart
+async function deleteAllItemsFromACartAsync(cartId) {
+    const sql = `DELETE FROM cartitems WHERE cartId=${cartId}`;
+    await dal.executeAsync(sql);
+}
+
+// delete entire shopping cart
+async function deleteEntireShoppingCart(cartId) {
+    const sql = `DELETE FROM shoppingcarts WHERE cartId=${cartId}`;
+    await dal.executeAsync(sql);
+}
+
 // partial update - change the quantity of a specific item in a specific cart
 async function updateQuantityOfItem(item) {
     const sql = `UPDATE cartitems SET quantity=${item.quantity} WHERE itemId=${item.itemId}`;
     const info = await dal.executeAsync(sql);
     return info.affectedRows === 0 ? null : item;
 }
+
+// partial update - change the isOrdered from false to true, once an order was made to that cart 
+async function isOrderedAsync(shoppingCart){
+    const sql = `UPDATE shoppingcarts SET isOrdered=1 WHERE cartId=${shoppingCart.cartId}`;
+    const info = await  dal.executeAsync(sql);
+    return info.affectedRows === 0 ? null : shoppingCart;
+}
+
+// check if user 
 
 module.exports = {
     addNewCartAsync,
@@ -84,5 +105,8 @@ module.exports = {
     updateQuantityOfItem,
     getAllShoppingCartsAsync,
     checkIfItemInCartAsync,
-    getOneCartItemAsync
+    getOneCartItemAsync,
+    deleteAllItemsFromACartAsync,
+    deleteEntireShoppingCart,
+    isOrderedAsync
 }

@@ -20,17 +20,25 @@ export class MenuComponent implements OnInit {
     public categories: CategoryModel[];
     public unsubscribeStore: Unsubscribe;
 
-    constructor(private categoriesService: CategoriesService, private activatedRoute: ActivatedRoute) { }
-
-
-    public async ngOnInit() {
-
-        // get list of categories for the drop down menu
-        this.categories = await this.categoriesService.getAllCategories();
-
+    constructor(private categoriesService: CategoriesService, private activatedRoute: ActivatedRoute) {
         this.unsubscribeStore = store.subscribe(() => {
             this.user = store.getState().authState.user;
         });
+    }
+
+
+    public async ngOnInit() {
+        try {
+
+
+            // get list of categories for the drop down menu
+            this.categories = await this.categoriesService.getAllCategories();
+        }
+        catch (err) {
+            alert(err.error);
+            console.log(err);
+        }
+
     }
 
     public ngOnDestroy(): void {

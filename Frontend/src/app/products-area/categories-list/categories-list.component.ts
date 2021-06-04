@@ -12,20 +12,20 @@ import { ProductsService } from 'src/app/services/products.service';
     styleUrls: ['./categories-list.component.css']
 })
 export class CategoriesListComponent implements OnInit {
-    
+
     public categories: CategoryModel[];
-    
-    constructor(private errorsService: ErrorsService, private activatedRoute: ActivatedRoute, private categoriesService: CategoriesService, private productsService: ProductsService) { }
+
+    constructor(private errorsService: ErrorsService, private categoriesService: CategoriesService) { }
 
     public async ngOnInit() {
         try {
-             // get list of categories 
+            // get list of categories 
             this.categories = await this.categoriesService.getAllCategories();
             console.log(this.categories);
         }
         catch (err) {
             console.log(err);
-            alert(err.statusText);
+            alert(this.errorsService.getError(err));
         }
     }
 

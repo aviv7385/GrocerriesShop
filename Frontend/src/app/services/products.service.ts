@@ -60,6 +60,4 @@ export class ProductsService {
         store.dispatch({ type: ProductsActionType.ProductUpdated, payload: updatedProduct });
         return updatedProduct;
     }
-
-
 }

@@ -22,7 +22,8 @@ export class LoginComponent {
                 this.router.navigateByUrl("/admin");
             }
             else {
-                this.router.navigateByUrl("/home");
+                //this.router.navigateByUrl("/home");
+                window.location.reload();
             }
         }
         catch (err) {

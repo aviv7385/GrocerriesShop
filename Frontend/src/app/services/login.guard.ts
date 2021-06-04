@@ -16,9 +16,9 @@ export class LoginGuard implements CanActivate {
             return true; // you can enter the target route
         };
 
-        alert("You are not logged in!"); // show alert 
+        alert("Please login first"); // show alert 
 
-        this.router.navigateByUrl("/login"); // redirect to login page
+        this.router.navigateByUrl("/home"); // redirect to home page
         return false; // you cannot enter the target route
     }
 }

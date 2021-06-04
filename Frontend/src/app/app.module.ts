@@ -1,4 +1,3 @@
-//import { CategoriesListComponent } from './products-area/categories-list/categories-list.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +31,9 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { AddToCartComponent } from './carts-area/add-to-cart/add-to-cart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DisplayCartComponent } from './carts-area/display-cart/display-cart.component';
+import { TotalProductsComponent } from './products-area/total-products/total-products.component';
+import { OpenCartComponent } from './carts-area/open-cart/open-cart.component';
+import { AboutComponent } from './layout-area/about/about.component';
 
 @NgModule({
     declarations: [
@@ -53,8 +55,10 @@ import { DisplayCartComponent } from './carts-area/display-cart/display-cart.com
         AdminEditProductComponent,
         ProductsByCategoryComponent,
         AddToCartComponent,
-        DisplayCartComponent
-        //CategoriesListComponent
+        DisplayCartComponent,
+        TotalProductsComponent,
+        OpenCartComponent,
+        AboutComponent   
     ],
     imports: [
         BrowserModule,

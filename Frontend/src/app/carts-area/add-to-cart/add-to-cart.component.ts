@@ -12,7 +12,7 @@ import { ProductModel } from 'src/app/models/product.model';
     styleUrls: ['./add-to-cart.component.css']
 })
 export class AddToCartComponent implements OnInit {
-    
+
     @Input() // props
     public product: ProductModel;
 
@@ -20,14 +20,13 @@ export class AddToCartComponent implements OnInit {
     public cartItem = new CartItemModel();
     public cartItems: CartItemModel[];
     public user = store.getState().authState.user;
+    public shoppingCarts: ShoppingCartModel[];
 
     constructor(private errorsService: ErrorsService, private cartsService: CartsService) { }
 
     public async ngOnInit() {
         try {
-            // create new shopping cart or use an open one
-            const newShoppingCart = await this.cartsService.addShoppingCart(this.shoppingCart);
-            console.log(newShoppingCart);
+            
         }
         catch (err) {
             this.errorsService.getError(err);
@@ -35,5 +34,6 @@ export class AddToCartComponent implements OnInit {
     }
 
 
-    
+
+
 }

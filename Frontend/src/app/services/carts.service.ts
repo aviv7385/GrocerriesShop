@@ -18,16 +18,21 @@ export class CartsService {
     public async getAllCartItems(cartId: number): Promise<CartItemModel[]> {
         const cartItems = await this.httpClient.get<CartItemModel[]>(environment.cartsUrl + cartId).toPromise();
         store.dispatch({ type: CartsActionType.CartItemsDownloaded, payload: cartItems });
-        console.log(store.getState().cartsState.cartItems);
         return store.getState().cartsState.cartItems;
     }
 
+    // get all shopping carts
+    public async getAllShoppingCarts():Promise<ShoppingCartModel[]>{
+        const shoppingCart = await this.httpClient.get<ShoppingCartModel[]>(environment.cartsUrl).toPromise();
+        return shoppingCart;
+    }
 
     // create new shopping cart
     public async addShoppingCart(shoppingCart: ShoppingCartModel): Promise<ShoppingCartModel> {
         if (!store.getState().cartsState.shoppingCart) {
             shoppingCart.userId = store.getState().authState.user.userId;
             shoppingCart.date = new Date();
+            
             const newShoppingCart = await this.httpClient.post<ShoppingCartModel>(environment.cartsUrl, shoppingCart).toPromise();
             store.dispatch({ type: CartsActionType.ShoppingCartCreated, payload: newShoppingCart });
         }
@@ -53,9 +58,20 @@ export class CartsService {
     // delete one item /items/:itemId
     public async deleteOneItem(itemId: number) {
         await this.httpClient.delete<CartItemModel>(environment.cartsUrl + "items/" + itemId).toPromise();
-        console.log(itemId);
         store.dispatch({ type: CartsActionType.CartItemDeleted, payload: itemId });
     }
 
     // delete all items from a cart
+    public async deleteAllCartItems(cartId: number) {
+        await this.httpClient.delete<CartItemModel>(environment.cartsUrl + "remove-items/" + cartId).toPromise();
+        store.dispatch({ type: CartsActionType.CartItemDeleted, payload: cartId });
+    }
+
+    // when cart is ordered (when the order is closed) - update the isOrdered column (in shoppingcarts table) from "false" to "true"
+    public async updateIsOrdered(shoppingCart: ShoppingCartModel): Promise<ShoppingCartModel> {
+        shoppingCart.isOrdered = true;
+        const updatedShoppingCart = await this.httpClient.patch<ShoppingCartModel>(environment.ordersUrl + "is-ordered/" + shoppingCart.cartId, shoppingCart).toPromise();
+        return updatedShoppingCart;
+    }
+
 }

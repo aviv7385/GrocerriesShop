@@ -1,20 +1,20 @@
 <h2>Login</h2>
 
-<div class="box">
-<form #formInfo="ngForm" (submit)="login()">
+<div>
+    <form #formInfo="ngForm" (submit)="login()">
 
-    <label>Email:</label>
-    <input type="email" name="email" [(ngModel)]="credentials.email" #emailInfo="ngModel" required>
-    <span *ngIf="emailInfo.errors?.required && emailInfo.touched">Required Field</span>
-    <br><br>
+        <label>Email:</label>
+        <input type="email" name="email" [(ngModel)]="credentials.email" #emailInfo="ngModel" required>
+        <span *ngIf="emailInfo.errors?.required && emailInfo.touched">Required Field</span>
+        <br><br>
 
-    <label>Password:</label>
-    <input type="password" name="password" [(ngModel)]="credentials.password" #passwordInfo="ngModel" required>
-    <span *ngIf="passwordInfo.errors?.required && passwordInfo.touched">Required Field</span>
-    <br><br>
+        <label>Password:</label>
+        <input type="password" name="password" [(ngModel)]="credentials.password" #passwordInfo="ngModel" required>
+        <span *ngIf="passwordInfo.errors?.required && passwordInfo.touched">Required Field</span>
+        <br><br>
 
-    <button [disabled]="formInfo.form.invalid" mat-raised-button color="accent">Login</button>
-</form>
-<br>
-<p>Not registered yet? Join us <a routerLink="/register">HERE!</a></p>
+        <button [disabled]="formInfo.form.invalid" mat-raised-button color="accent">Login</button>
+    </form>
+    <br>
+    <p>Not registered yet? Join us <a routerLink="/register">HERE!</a></p>
 </div>
